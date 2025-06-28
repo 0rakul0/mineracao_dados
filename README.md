@@ -3,7 +3,7 @@
 
 Este projeto tem como objetivo realizar uma análise exploratória detalhada do dataset de voos **`bfd_2019.rdata`**, com foco na identificação de padrões, tendências e possíveis variáveis relacionadas a **atrasos de chegada**.
 
-(link do dataset)[https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata]
+[link do dataset](https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata)
 
 ---
 

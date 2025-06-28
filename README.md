@@ -1,32 +1,107 @@
-# mineracao_dados
 
-## Organização do trabalho: 
-Tipos de dados por coluna 
-Quantidade de NAs por coluna 
-Boxplot por cada coluna numérica, histograma e gráfico de densidade de distribuição 
-Summary para cada coluna 
-Para cada coluna numérica: 
-Média, Desvio, Skewness, kurtosis, max, min, quantis, moda 
-Identificar quais são as variáveis que precisam de normalização 
+# 📊 Análise Exploratória de Dados — `bfd_2019.rdata`
 
-# Perguntas relevantes: 
-Quais são as principais variáveis correlacionadas de um atraso?  
+Este projeto tem como objetivo realizar uma análise exploratória detalhada do dataset de voos **`bfd_2019.rdata`**, com foco na identificação de padrões, tendências e possíveis variáveis relacionadas a **atrasos de chegada**.
 
-# Gráficos necessários: 
-Boxplot, histograma, densidade de probabilidade, scatter (para duas variáveis), correlação, parallel coordinates (classificação de chegada pelas diversas features normalizadas). 
+(link do dataset)[https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata]
 
-# Divisão de colunas: 
+---
 
-1 - 16 -- Jefferson 
-17 - 31 -- Aline 
-32 - 48 -- JP 
+## 📌 Etapas da Análise
 
-# Análises iniciais: 
-Tipos de dados por coluna 
-Quantidade de NAs por coluna 
-Gráficos, Summary, medidas estatísticas descritivas e identificar quais são as variáveis que precisam de normalização (cada faz no seu range de colunas):  
-Boxplot por cada coluna numérica, histograma e gráfico de densidade de distribuição 
+### 1. Entendimento Inicial
+- Identificar número de linhas e colunas
+- Compreender o significado das variáveis
+- Verificar tipos de dados
+- Analisar presença de NAs e valores únicos
 
-# Análises finais: 
-Coorrelação 
-Parallel Coordinates 
+### 2. Avaliação da Qualidade dos Dados
+- Quantidade de NAs por coluna
+- Valores inconsistentes ou fora do esperado
+- Colunas com baixa variação ou valor constante
+
+### 3. Análise Univariada
+**Para variáveis numéricas**:
+- Média, mediana, desvio padrão, mínimo, máximo, moda, skewness, curtose, quantis
+- Gráficos: histograma, boxplot, curva de densidade
+
+**Para variáveis categóricas**:
+- Frequência de categorias
+- Distribuição gráfica (gráfico de barras)
+
+### 4. Análise Bivariada
+- Correlação entre variáveis numéricas
+- Comparações entre variáveis categóricas e o atraso
+- Gráficos de dispersão (scatterplot), boxplot por categoria
+
+### 5. Análise Multivariada
+- **Correlação geral** entre variáveis
+- **Parallel Coordinates Plot** para variáveis normalizadas (identificação de padrões de atraso)
+
+### 6. Normalização
+- Verificar necessidade de normalização/padronização de variáveis
+- Avaliar transformações para variáveis assimétricas (ex: log)
+
+---
+
+## ❓ Perguntas-Chave a Responder
+- Quais variáveis estão mais associadas ao atraso?
+- Há companhias aéreas ou aeroportos mais propensos a atrasos?
+- O horário ou dia da semana influencia nos atrasos?
+- Atraso na decolagem é preditivo do atraso na chegada?
+- Qual a distribuição geral dos atrasos?
+
+---
+
+## 👥 Divisão por Times
+
+| Faixa de colunas | Responsável | Tarefas |
+|------------------|-------------|---------|
+| Colunas 1 a 16   | Jefferson   | Análise univariada + tratamento + gráficos |
+| Colunas 17 a 31  | Aline       | Análise univariada + tratamento + gráficos |
+| Colunas 32 a 48  | JP          | Análise univariada + tratamento + gráficos |
+
+Cada integrante deve:
+- Identificar tipo, NAs, valores únicos
+- Fazer análise estatística descritiva
+- Gerar gráficos básicos (boxplot, histograma, densidade)
+- Sugerir transformações ou exclusões
+- Destacar possíveis relações com atrasos
+
+---
+
+## 📍 Entregáveis esperados
+
+- [ ] README atualizado com insights parciais por integrante
+- [ ] Gráficos salvos ou script R de geração
+- [ ] Lista de variáveis que requerem normalização
+- [ ] Tabela de variáveis mais correlacionadas com o atraso
+- [ ] Análise conjunta final (gráficos de correlação e parallel coordinates)
+
+---
+
+## 📂 Organização dos Arquivos
+
+```
+📁 projeto/
+│
+│
+├── scripts/               # Scripts R de análise
+│   ├── jefferson_eda.R
+│   ├── aline_eda.R
+│   └── jp_eda.R
+│
+├── plots/                 # Gráficos gerados por cada integrante
+│
+├── README.md              # Este roteiro
+```
+
+---
+
+## 🔄 Próximos Passos
+
+- [ ] Cada integrante realiza análise exploratória de sua faixa
+- [ ] Unificar insights e preparar seção de análise conjunta
+- [ ] Preparar visualizações finais para apresentação
+
+---

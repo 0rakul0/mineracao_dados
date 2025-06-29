@@ -1,0 +1,260 @@
+---
+title: "Analise exploratória"
+output: html_notebook
+---
+
+A analise será feita no datasete [bfd_2019]("https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata").
+
+O objetivo é analisar e falar sobre o que tem na base assim como detalhes importantes e descobertas, assim gerando perguntas sobre o tema
+
+A base consiste em 983396 contendo 48 colunas, a documentação sobre os atributos estão em [documentação](https://osf.io/8eh3p/)
+
+carregando a basse e as lib que serão utilizadas
+```{r}
+dados <- get(load(url("https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata")))
+```
+
+obtendo algumas informações sobre a base
+```{r}
+dim(dados)
+```
+```{r}
+str(dados)
+```
+À primeira vista, observamos que o conjunto de dados possui diversos pontos que podem ser explorados. Para seguir um caminho de análise, vamos examinar algumas colunas específicas e, a partir delas, destacar certos aspectos de forma mais detalhada.
+
+Por exemplo, as colunas `expected_depart`, `real_depart`, `expected_arrival` e `real_arrival` são variáveis temporais. Elas indicam os horários programados (`expected_`) e os horários reais (`real_`) de partida e chegada dos voos.
+
+As informações de atraso ou adiantamento estão refletidas nas colunas `delay_depart` e `delay_arrival`. A coluna `delay_depart` indica quanto tempo o voo partiu após ou antes do horário previsto. Quando o valor é negativo, como por exemplo -7, significa que o voo saiu 7 minutos adiantado. Já a coluna `delay_arrival` mostra o tempo de atraso ou adiantamento na chegada, com base na diferença entre `expected_arrival` e `real_arrival`.
+
+A lógica é que, quanto maior o atraso na saída, maior a probabilidade de ele impactar também o horário de chegada ao destino.
+
+A coluna observation trás informações sobre o voo o que nos esclarece muitas coisas, sobre o que está acontecendo com o voo. 
+
+```{r}
+library(dplyr)
+
+obs_mais_comuns <-dados %>%
+  filter(!is.na(observation)) %>%
+  count(observation, sort = TRUE) 
+
+obs_mais_comuns
+```
+Note que temos cerca de 45 tipos de observações diferentes, para reduzir a dimenção por problemas semelhantes vamos criar uma variavel com o proposito de agregar dados semelhantes
+
+```{r}
+summary(dados$delay_depart)
+```
+como podemos observar temos valores outliers
+
+```{r}
+summary(dados$delay_arrival)
+```
+vamos ver a distribuição geral
+```{r}
+
+dados %>%
+  filter(delay_depart >= -500, delay_depart <= 500) %>%
+  summarise(
+    min = min(delay_depart, na.rm = TRUE),
+    max = max(delay_depart, na.rm = TRUE),
+    mean = mean(delay_depart, na.rm = TRUE),
+    median = median(delay_depart, na.rm = TRUE)
+  )
+
+```
+A mediana = 0 indica que mais da metade dos voos não tiveram atraso (ou partiram no horário).
+A média positiva (4.79 min) mostra que, no geral, os voos atrasam levemente.
+Os valores extremos originais (como 305314 ou -525623) provavelmente são erros ou registros inválidos.
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+tempo <- 100
+
+# Filtrar valores extremos para visualização
+dados_filtrados <- dados %>%
+  filter(
+    delay_depart >= - tempo, delay_depart <= tempo,
+    delay_arrival >= - tempo, delay_arrival <= tempo
+  )
+
+# Transformar para formato longo
+dados_long <- dados_filtrados %>%
+  pivot_longer(cols = c(delay_depart, delay_arrival),
+               names_to = "tipo_delay",
+               values_to = "delay")
+
+# Plotar histograma com cores por tipo de atraso
+ggplot(dados_long, aes(x = delay, fill = tipo_delay)) +
+  geom_histogram(alpha = 0.5, position = "identity", binwidth = 10, color = "white") +
+  scale_fill_manual(values = c("delay_depart" = "steelblue", "delay_arrival" = "darkred"),
+                    labels = c("Partida", "Chegada")) +
+  labs(
+    title = "Distribuição dos Atrasos",
+    x = "Atraso (minutos)",
+    y = "Frequência",
+    fill = "Tipo de Atraso"
+  ) +
+  theme_minimal()
+
+```
+
+```{r}
+library(stringr)
+
+dados <- dados %>%
+  mutate(obs_categoria = case_when(
+    str_detect(observation, regex("LIBERAÇÃO|PLANO DE VOO|ANTECIPAÇÃO|AUTORIZAD[AO]", ignore_case = TRUE)) ~ "Tráfego aéreo / Autorização",
+    str_detect(observation, regex("DEFEITO|TROCA DE AERONAVE|AVARIA|PANE|DEGELO", ignore_case = TRUE)) ~ "Problema na aeronave",
+    str_detect(observation, regex("CONEXÃO AERONAVE|VOO DE IDA", ignore_case = TRUE)) ~ "Conexão",
+    str_detect(observation, regex("METEOROLÓGICAS|ABAIXO LIMITES|GELO|NEVE|LAMA", ignore_case = TRUE)) ~ "Clima",
+    str_detect(observation, regex("AEROPORTO .*INTERDITADO|RESTRIÇÃO|FACILIDADES|DESTINO INTERDITADO|ALTERNATIVA", ignore_case = TRUE)) ~ "Infraestrutura Aeroportuária",
+    str_detect(observation, regex("EQUIPO|ABASTECIMENTO|DESTANQUEIO|OPERAÇÕES EM SOLO", ignore_case = TRUE)) ~ "Falha de equipamentos/apoio",
+    str_detect(observation, regex("SEGURANÇA|PAX|CARGA|ALFÂNDEGA|MIGRAÇÃO", ignore_case = TRUE)) ~ "Segurança / Passageiros / Alfândega",
+    str_detect(observation, regex("^CANCELAMENTO", ignore_case = TRUE)) ~ "Cancelamento técnico ou climático",
+    str_detect(observation, regex("FERIADO|VOO ESPECIAL|INCLUSÃO DE ETAPA", ignore_case = TRUE)) ~ "Outros específicos",
+    str_detect(observation, regex("ATRASOS NÃO ESPECÍFICOS", ignore_case = TRUE)) ~ "Outros não específicos",
+    TRUE ~ "Outros não específicos"
+  ))
+
+atrasos_por_categoria <- dados %>%
+  group_by(obs_categoria) %>%
+  summarise(
+    media_atraso_depart = mean((delay_arrival - delay_depart), na.rm = TRUE),
+    total_voos = n()
+  ) %>%
+  arrange(desc(media_atraso_depart))
+
+atrasos_por_categoria
+```
+para enteder melhor o que está acontecendo com esses voo com o tempo de viagem tão longo, podemos observar seus atributos de tempo
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+# 1. Filtrar voos com delay_depart ou delay_arrival > 500 minutos
+voos_extremos <- dados %>%
+  filter(delay_depart > 500 | delay_arrival > 500)
+
+# 2. Ver as observações mais comuns
+voos_extremos %>%
+  count(obs_categoria, sort = TRUE)
+
+```
+```{r}
+voos_extremos %>%
+  count(obs_categoria, sort = TRUE) %>%
+  slice_head(n = 15) %>%
+  ggplot(aes(x = reorder(obs_categoria, n), y = n)) +
+  geom_col(fill = "#0072B2") +
+  coord_flip() +
+  labs(
+    title = "Principais observações em voos com atraso > 500 min",
+    x = "Observação",
+    y = "Número de voos"
+  ) +
+  theme_minimal()
+
+```
+
+descrição de type: (N) Nacional, (I) Internacional, (R) Regional, (H) Sub-regional, (E) Especial, (c) frete/carga, (g) frete/carga internacional e (l) rede postal;
+```{r}
+library(dplyr)
+
+voos_atraso_chegada_grande <- dados %>%
+  filter(
+    delay_arrival > 60,
+    !type %in% c("C", "G", "L"),
+    abs(expected_flight_length - real_flight_length) > 60
+  ) %>%
+  select(route, type, expected_flight_length, real_flight_length, observation)
+
+voos_atraso_chegada_grande
+
+```
+aqui podemos observar que mesmo com a demora para o voo sair e chegar a maior parte dos voos não tem tanta diferença de voo, porém se observamos os voos que tem uma janela de mais de 1 hora de expectativa de chegada temos o seguinte grafico
+```{r}
+library(dplyr)
+library(ggplot2)
+
+obs_counts <- dados %>%
+  filter(
+    delay_arrival > 60,
+    !type %in% c("C", "G", "L"),
+    abs(expected_flight_length - real_flight_length) > 60
+  ) %>%
+  count(obs_categoria, sort = TRUE) %>%
+  slice_head(n = 10)
+
+ggplot(obs_counts, aes(x = reorder(obs_categoria, n), y = n)) +
+  geom_col(fill = "steelblue") +
+  geom_text(aes(label = n), hjust = -0.1, size = 3.5) +
+  coord_flip() +
+  labs(
+    title = "Observações para voos com grande discrepância de tempo",
+    x = "Observação",
+    y = "Contagem"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.text.y = element_text(size = 10),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 20)  # aumenta as margens
+  ) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))
+
+```
+```{r}
+library(ggplot2)
+library(dplyr)
+
+dados_plot <- atrasos_por_categoria %>%
+  filter(!is.na(media_atraso_depart), !is.nan(media_atraso_depart), is.finite(media_atraso_depart))
+
+ggplot(dados_plot, aes(x = reorder(obs_categoria, media_atraso_depart), y = media_atraso_depart)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(x = "Categoria", y = "Média da Diferença de Atraso (chegada - partida)",
+       title = "Atraso Médio por Categoria de Observação") +
+  theme_minimal()
+
+```
+um detalhe muito interessante sobre as colunas status é que ela fala se o avião saiu no horário certo ou quando em qual ponto está o atraso do voo está em de 30 em 30 minutos
+
+```{r}
+library(dplyr)
+
+dados_contagem <- dados %>%
+  count(status_depart, status_arrival)
+
+dados_contagem
+```
+para ficar melhor de vizualizar
+```{r}
+library(ggplot2)
+
+niv <- c("Antecipado", "Pontual", "Atraso 30-60", "Atraso 60-120", "Atraso 120-240", "Atraso >240")
+
+dados_contagem$status_depart <- factor(dados_contagem$status_depart, levels = niv)
+dados_contagem$status_arrival <- factor(dados_contagem$status_arrival, levels = niv)
+
+ggplot(dados_contagem, aes(x = status_depart, y = status_arrival)) +
+  geom_point(aes(size = n, color = n), alpha = 0.7) +
+  geom_text(aes(label = n), vjust = -0.8, size = 3.2) +
+  scale_size_continuous(range = c(2, 15)) +
+  scale_color_viridis_c() +
+  theme_minimal() +
+  labs(
+    x = "Status na Partida",
+    y = "Status na Chegada",
+    title = "Relação entre Status de Partida e Chegada",
+    size = "Contagem",
+    color = "Contagem"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+``` 

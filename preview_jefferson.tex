@@ -1,0 +1,2065 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Analise exploratória},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Analise exploratória}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+A analise será feita no datasete
+\href{\%22https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata\%22}{bfd\_2019}.
+
+O objetivo é analisar e falar sobre o que tem na base assim como
+detalhes importantes e descobertas, assim gerando perguntas sobre o tema
+
+A base consiste em 983396 contendo 48 colunas, a documentação sobre os
+atributos estão em \href{https://osf.io/8eh3p/}{documentação}
+
+carregando a basse e as lib que serão utilizadas
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\OtherTok{\textless{}{-}} \FunctionTok{get}\NormalTok{(}\FunctionTok{load}\NormalTok{(}\FunctionTok{url}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/eogasawara/datamining/main/data{-}work/bfd\_2019.rdata"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+obtendo algumas informações sobre a base
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 983396     48
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    983396 obs. of  48 variables:
+##  $ arrival                            : chr  "CYUL" "CYUL" "CYUL" "CYUL" ...
+##  $ depart                             : chr  "SBGR" "SBGR" "SBGR" "SBGR" ...
+##  $ route                              : chr  "SBGR-CYUL" "SBGR-CYUL" "SBGR-CYUL" "SBGR-CYUL" ...
+##  $ company                            : chr  "ACA" "ACA" "ACA" "ACA" ...
+##  $ flight                             : chr  "0097" "0097" "0097" "0097" ...
+##  $ di                                 : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ type                               : chr  "I" "I" "I" "I" ...
+##  $ depart_day_period                  : Ord.factor w/ 7 levels "Night"<"Early Morning"<..: 2 2 2 2 2 2 2 2 2 7 ...
+##  $ arrival_day_period                 : Ord.factor w/ 7 levels "Night"<"Early Morning"<..: 6 6 6 6 6 6 6 6 6 2 ...
+##  $ expected_depart                    : POSIXlt, format: "2019-12-12 08:40:00" "2019-12-14 08:40:00" ...
+##  $ real_depart                        : POSIXlt, format: "2019-12-12 09:07:00" "2019-12-14 08:40:00" ...
+##  $ expected_arrival                   : POSIXlt, format: "2019-12-12 18:45:00" "2019-12-14 18:45:00" ...
+##  $ real_arrival                       : POSIXlt, format: "2019-12-12 19:34:00" "2019-12-14 18:45:00" ...
+##  $ status_depart                      : chr  "Pontual" "Pontual" "Pontual" "Pontual" ...
+##  $ status_arrival                     : chr  "Atraso 30-60" "Pontual" "Pontual" "Atraso 30-60" ...
+##  $ observation                        : chr  "CONEXÃO DE AERONAVE" NA NA "CONEXÃO DE AERONAVE" ...
+##  $ delay_depart                       : num  27 0 0 15 7 0 0 0 -1 0 ...
+##  $ delay_arrival                      : num  49 0 0 38 34 0 0 0 2 0 ...
+##  $ expected_flight_length             : num  605 605 605 605 605 605 605 605 605 615 ...
+##  $ real_flight_length                 : num  627 605 605 628 632 605 605 605 608 615 ...
+##  $ outlier_depart_delay               : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ outlier_arrival_delay              : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ outlier_expected_flight_consistency: logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ outlier_real_flight_consistency    : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ outlier_expected_flight_length     : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ outlier_real_flight_length         : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ depart_air_temperature             : num  21 23 26 21 24 20 23 23 20 23 ...
+##  $ depart_dew_point                   : num  19 19 18 20 19 20 20 20 19 23 ...
+##  $ depart_relative_humidity           : num  88.3 78.2 61.4 94 73.6 ...
+##  $ depart_wind_direction              : num  270 90 20 130 320 320 70 90 60 100 ...
+##  $ depart_wind_speed                  : num  2 5 9 5 13 2 6 3 9 3 ...
+##  $ depart_sky_coverage                : chr  NA "SCT" NA "OVC" ...
+##  $ depart_pressure                    : num  29.9 30.2 30 30.1 30 ...
+##  $ depart_visibility                  : num  6.21 6.21 6.21 6.21 6.21 4.97 6.21 6.21 5.59 6.21 ...
+##  $ depart_apparent_temperature        : num  21 23 26 21 24 ...
+##  $ depart_wind_speed_scale            : Ord.factor w/ 11 levels "Calm"<"Light Air"<..: 2 3 4 3 5 2 3 2 4 2 ...
+##  $ depart_wind_direction_cat          : Ord.factor w/ 16 levels "N"<"NNE"<"NE"<..: 13 5 2 7 15 15 4 5 4 5 ...
+##  $ arrival_air_temperature            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_dew_point                  : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_relative_humidity          : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_wind_direction             : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_wind_speed                 : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_sky_coverage               : chr  NA NA NA NA ...
+##  $ arrival_pressure                   : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_visibility                 : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_apparent_temperature       : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_wind_speed_scale           : Ord.factor w/ 11 levels "Calm"<"Light Air"<..: NA NA NA NA NA NA NA NA NA NA ...
+##  $ arrival_wind_direction_cat         : Ord.factor w/ 16 levels "N"<"NNE"<"NE"<..: NA NA NA NA NA NA NA NA NA NA ...
+\end{verbatim}
+
+À primeira vista, observamos que o conjunto de dados possui diversos
+pontos que podem ser explorados. Para seguir um caminho de análise,
+vamos examinar algumas colunas específicas e, a partir delas, destacar
+certos aspectos de forma mais detalhada.
+
+Por exemplo, as colunas \texttt{expected\_depart},
+\texttt{real\_depart}, \texttt{expected\_arrival} e
+\texttt{real\_arrival} são variáveis temporais. Elas indicam os horários
+programados (\texttt{expected\_}) e os horários reais (\texttt{real\_})
+de partida e chegada dos voos.
+
+As informações de atraso ou adiantamento estão refletidas nas colunas
+\texttt{delay\_depart} e \texttt{delay\_arrival}. A coluna
+\texttt{delay\_depart} indica quanto tempo o voo partiu após ou antes do
+horário previsto. Quando o valor é negativo, como por exemplo -7,
+significa que o voo saiu 7 minutos adiantado. Já a coluna
+\texttt{delay\_arrival} mostra o tempo de atraso ou adiantamento na
+chegada, com base na diferença entre \texttt{expected\_arrival} e
+\texttt{real\_arrival}.
+
+A lógica é que, quanto maior o atraso na saída, maior a probabilidade de
+ele impactar também o horário de chegada ao destino.
+
+A coluna observation trás informações sobre o voo o que nos esclarece
+muitas coisas, sobre o que está acontecendo com o voo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Anexando pacote: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## Os seguintes objetos são mascarados por 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## Os seguintes objetos são mascarados por 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{obs\_mais\_comuns }\OtherTok{\textless{}{-}}\NormalTok{dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(observation)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(observation, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }
+
+\NormalTok{obs\_mais\_comuns}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                                                                            observation
+## 1                                                            LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 2                                                                      ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 3                                                                                  CONEXÃO DE AERONAVE
+## 4                                                                    ANTECIPAÇÃO DE HORÁRIO AUTORIZADA
+## 5                                                                                 DEFEITOS DA AERONAVE
+## 6                             CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 7                                                      FALHA EQUIPO AUTOMOTIVO E DE ATENDIMENTO DE PAX
+## 8                                                     CANCELAMENTO POR MOTIVOS TÉCNICOS - OPERACIONAIS
+## 9                          CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 10                                                                          SEGURANÇA/PAX/CARGA/ALARME
+## 11                                                               AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 12                                                                                   TROCA DE AERONAVE
+## 13                                                     CANCELAMENTO - AEROPORTO DESTINO ABAIXO LIMITES
+## 14                                                      FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 15                                                                                          AUTORIZADO
+## 16                                                                 AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 17                             VOO ESPECIAL DE RETORNO (EXCLUSIVO PARA RETORNO AO AEROPORTO DE ORIGEM)
+## 18                                                                     AEROPORTO DE ORIGEM INTERDITADO
+## 19                                                      CANCELAMENTO - AEROPORTO ORIGEM ABAIXO LIMITES
+## 20                                                                AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 21                                                                           ABASTECIMENTO/DESTANQUEIO
+## 22                                  ANTECIPAÇÃO DE HORÁRIO AUTORIZADA - ESPECÍFICO VOOS INTERNACIONAIS
+## 23                                                         REMOÇÃO GELO/ÁGUA/LAMA/AREIA - EM AEROPORTO
+## 24                                                                            PLANO DE VOO - APROVAÇÃO
+## 25               FALTA PAX COM PASSAGEM MARCADA - ( APENAS PARA AS LINHAS AÉREAS DOMÉSTICAS REGIONAIS)
+## 26             CANCELAMENTO - CONEXÃO AERONAVE/VOLTA - VOO DE IDA CANCELADO - CONDIÇÕES METEOROLÓGICAS
+## 27                                                                     AVARIA DURANTE OPERAÇÕES EM VOO
+## 28                                          ATRASO AEROPORTO DE ALTERNATIVA - CONDIÇÕES METEOROLÓGICAS
+## 29                                                    ATRASO DEVIDO RETORNO - CONDIÇÕES METEOROLÓGICAS
+## 30                                                             DEVIDO AEROPORTO DE DESTINO INTERDITADO
+## 31                                                                            MIGRAÇÃO/ALFÂNDEGA/SAÚDE
+## 32                                                                    AEROPORTO DE DESTINO INTERDITADO
+## 33                                                              DEVIDO AEROPORTO DE ORIGEM INTERDITADO
+## 34                                                                    AVARIA DURANTE OPERAÇÕES EM SOLO
+## 35                                                      DEGELO E REMOÇÃO DE NEVE E/OU LAMA EM AERONAVE
+## 36                CANCELAMENTO - CONEXÃO AERONAVE/VOLTA - VOO DE IDA CANCELADO - AEROPORTO INTERDITADO
+## 37 INCLUSÃO DE ETAPA DEVIDO CANCELAMENTO DE ESCALAS PREVISTAS - ( EXCLUSIVO PARA LINHAS SUPLEMENTADAS)
+## 38                                        OPERAÇÃO DE VOO COM MAIS DE 04 HORAS DE ATRASO PANE AERONAVE
+## 39                                                         ESPECÍFICO PARA VOO ESPECIAL DE EXPERIÊNCIA
+## 40                                                                       PROGRAMADO - FERIADO NACIONAL
+## 41                       INCLUSÃO DE ETAPA (AEROPORTO DE ALTERNATIVA) DEVIDO A UM VOO ESPECIAL RETORNO
+## 42                                                                      ALTERNATIVA ABAIXO DOS LIMITES
+## 43                                                                                          AUTORIZADA
+## 44                                                     ATRASO AEROPORTO DE ALTERNATIVA - ORDEM TÉCNICA
+## 45                                                               ATRASO DEVIDO RETORNO - ORDEM TÉCNICA
+##         n
+## 1  115375
+## 2   36107
+## 3   33877
+## 4   29174
+## 5   20834
+## 6   17274
+## 7   16282
+## 8    9311
+## 9    9169
+## 10   8692
+## 11   7652
+## 12   4378
+## 13   4196
+## 14   4158
+## 15   3457
+## 16   3031
+## 17   2598
+## 18   2174
+## 19   2166
+## 20   1998
+## 21   1607
+## 22   1143
+## 23   1078
+## 24    738
+## 25    718
+## 26    570
+## 27    516
+## 28    475
+## 29    437
+## 30    368
+## 31    331
+## 32    283
+## 33    225
+## 34    140
+## 35    116
+## 36     57
+## 37     51
+## 38     42
+## 39     41
+## 40     39
+## 41     24
+## 42     14
+## 43      9
+## 44      2
+## 45      1
+\end{verbatim}
+
+Note que temos cerca de 45 tipos de observações diferentes, para reduzir
+a dimenção por problemas semelhantes vamos criar uma variavel com o
+proposito de agregar dados semelhantes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{delay\_depart)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max.       NA's 
+## -525615.00      -5.00       0.00      -3.54       4.00  132895.00      18135
+\end{verbatim}
+
+como podemos observar temos valores outliers
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{delay\_arrival)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max.      NA's 
+## -525623.0     -10.0       0.0      -4.3       2.0  305314.0     18135
+\end{verbatim}
+
+vamos ver a distribuição geral
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(delay\_depart }\SpecialCharTok{\textgreater{}=} \SpecialCharTok{{-}}\DecValTok{500}\NormalTok{, delay\_depart }\SpecialCharTok{\textless{}=} \DecValTok{500}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{min =} \FunctionTok{min}\NormalTok{(delay\_depart, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{max =} \FunctionTok{max}\NormalTok{(delay\_depart, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(delay\_depart, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{median =} \FunctionTok{median}\NormalTok{(delay\_depart, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    min max     mean median
+## 1 -499 500 4.789688      0
+\end{verbatim}
+
+A mediana = 0 indica que mais da metade dos voos não tiveram atraso (ou
+partiram no horário). A média positiva (4.79 min) mostra que, no geral,
+os voos atrasam levemente. Os valores extremos originais (como 305314 ou
+-525623) provavelmente são erros ou registros inválidos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+
+\NormalTok{tempo }\OtherTok{\textless{}{-}} \DecValTok{100}
+
+\CommentTok{\# Filtrar valores extremos para visualização}
+\NormalTok{dados\_filtrados }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}
+\NormalTok{    delay\_depart }\SpecialCharTok{\textgreater{}=} \SpecialCharTok{{-}}\NormalTok{ tempo, delay\_depart }\SpecialCharTok{\textless{}=}\NormalTok{ tempo,}
+\NormalTok{    delay\_arrival }\SpecialCharTok{\textgreater{}=} \SpecialCharTok{{-}}\NormalTok{ tempo, delay\_arrival }\SpecialCharTok{\textless{}=}\NormalTok{ tempo}
+\NormalTok{  )}
+
+\CommentTok{\# Transformar para formato longo}
+\NormalTok{dados\_long }\OtherTok{\textless{}{-}}\NormalTok{ dados\_filtrados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(delay\_depart, delay\_arrival),}
+               \AttributeTok{names\_to =} \StringTok{"tipo\_delay"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"delay"}\NormalTok{)}
+
+\CommentTok{\# Plotar histograma com cores por tipo de atraso}
+\FunctionTok{ggplot}\NormalTok{(dados\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ delay, }\AttributeTok{fill =}\NormalTok{ tipo\_delay)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{position =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{binwidth =} \DecValTok{10}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"delay\_depart"} \OtherTok{=} \StringTok{"steelblue"}\NormalTok{, }\StringTok{"delay\_arrival"} \OtherTok{=} \StringTok{"darkred"}\NormalTok{),}
+                    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Partida"}\NormalTok{, }\StringTok{"Chegada"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribuição dos Atrasos"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Atraso (minutos)"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Frequência"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Tipo de Atraso"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{preview_jefferson_files/figure-latex/unnamed-chunk-8-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(stringr)}
+
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{obs\_categoria =} \FunctionTok{case\_when}\NormalTok{(}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"LIBERAÇÃO|PLANO DE VOO|ANTECIPAÇÃO|AUTORIZAD[AO]"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Tráfego aéreo / Autorização"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"DEFEITO|TROCA DE AERONAVE|AVARIA|PANE|DEGELO"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Problema na aeronave"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"CONEXÃO AERONAVE|VOO DE IDA"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Conexão"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"METEOROLÓGICAS|ABAIXO LIMITES|GELO|NEVE|LAMA"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Clima"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"AEROPORTO .*INTERDITADO|RESTRIÇÃO|FACILIDADES|DESTINO INTERDITADO|ALTERNATIVA"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Infraestrutura Aeroportuária"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"EQUIPO|ABASTECIMENTO|DESTANQUEIO|OPERAÇÕES EM SOLO"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Falha de equipamentos/apoio"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"SEGURANÇA|PAX|CARGA|ALFÂNDEGA|MIGRAÇÃO"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Segurança / Passageiros / Alfândega"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"\^{}CANCELAMENTO"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Cancelamento técnico ou climático"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"FERIADO|VOO ESPECIAL|INCLUSÃO DE ETAPA"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Outros específicos"}\NormalTok{,}
+    \FunctionTok{str\_detect}\NormalTok{(observation, }\FunctionTok{regex}\NormalTok{(}\StringTok{"ATRASOS NÃO ESPECÍFICOS"}\NormalTok{, }\AttributeTok{ignore\_case =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\textasciitilde{}} \StringTok{"Outros não específicos"}\NormalTok{,}
+    \ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \StringTok{"Outros não específicos"}
+\NormalTok{  ))}
+
+\NormalTok{atrasos\_por\_categoria }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(obs\_categoria) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{media\_atraso\_depart =} \FunctionTok{mean}\NormalTok{((delay\_arrival }\SpecialCharTok{{-}}\NormalTok{ delay\_depart), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{total\_voos =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(media\_atraso\_depart))}
+
+\NormalTok{atrasos\_por\_categoria}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 3
+##    obs_categoria                       media_atraso_depart total_voos
+##    <chr>                                             <dbl>      <int>
+##  1 Problema na aeronave                            8.64         26026
+##  2 Clima                                           0.338         8352
+##  3 Outros específicos                              0.00149       2729
+##  4 Outros não específicos                         -0.556       725134
+##  5 Conexão                                        -0.771        27070
+##  6 Infraestrutura Aeroportuária                   -0.940         7248
+##  7 Falha de equipamentos/apoio                    -1.42         17889
+##  8 Tráfego aéreo / Autorização                    -3.11        149896
+##  9 Segurança / Passageiros / Alfândega            -4.42          9741
+## 10 Cancelamento técnico ou climático             NaN             9311
+\end{verbatim}
+
+para enteder melhor o que está acontecendo com esses voo com o tempo de
+viagem tão longo, podemos observar seus atributos de tempo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# 1. Filtrar voos com delay\_depart ou delay\_arrival \textgreater{} 500 minutos}
+\NormalTok{voos\_extremos }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(delay\_depart }\SpecialCharTok{\textgreater{}} \DecValTok{500} \SpecialCharTok{|}\NormalTok{ delay\_arrival }\SpecialCharTok{\textgreater{}} \DecValTok{500}\NormalTok{)}
+
+\CommentTok{\# 2. Ver as observações mais comuns}
+\NormalTok{voos\_extremos }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(obs\_categoria, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                         obs_categoria    n
+## 1              Outros não específicos 1111
+## 2                Problema na aeronave  186
+## 3         Tráfego aéreo / Autorização  124
+## 4                             Conexão   32
+## 5        Infraestrutura Aeroportuária   15
+## 6 Segurança / Passageiros / Alfândega   12
+## 7         Falha de equipamentos/apoio    8
+## 8                               Clima    7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{voos\_extremos }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(obs\_categoria, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{15}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(obs\_categoria, n), }\AttributeTok{y =}\NormalTok{ n)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \StringTok{"\#0072B2"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Principais observações em voos com atraso \textgreater{} 500 min"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Observação"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Número de voos"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{preview_jefferson_files/figure-latex/unnamed-chunk-11-1.pdf}}
+
+descrição de type: (N) Nacional, (I) Internacional, (R) Regional, (H)
+Sub-regional, (E) Especial, (c) frete/carga, (g) frete/carga
+internacional e (l) rede postal;
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{voos\_atraso\_chegada\_grande }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}
+\NormalTok{    delay\_arrival }\SpecialCharTok{\textgreater{}} \DecValTok{60}\NormalTok{,}
+    \SpecialCharTok{!}\NormalTok{type }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"L"}\NormalTok{),}
+    \FunctionTok{abs}\NormalTok{(expected\_flight\_length }\SpecialCharTok{{-}}\NormalTok{ real\_flight\_length) }\SpecialCharTok{\textgreater{}} \DecValTok{60}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(route, type, expected\_flight\_length, real\_flight\_length, observation)}
+
+\NormalTok{voos\_atraso\_chegada\_grande}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         route type expected_flight_length real_flight_length
+## 1   SBGR-CYYZ    I                    555                628
+## 2   SBGR-CYYZ    I                    615                546
+## 3   SBRF-EDDF    I                    600                904
+## 4   SBRF-EDDF    I                    600                922
+## 5   SBGL-EGLL    I                    680               1398
+## 6   SBGL-EHAM    I                    685                832
+## 7   SBGR-EHAM    I                    695                935
+## 8   SBGL-EHAM    I                    685                980
+## 9   SBGR-FAOR    I                    505                567
+## 10  SBGR-FAOR    I                    625                743
+## 11  SBGR-FAOR    I                    625                698
+## 12  SBGR-FAOR    I                    625                538
+## 13  SBGR-FAOR    I                    505                570
+## 14  SBGR-FNLU    I                    435                500
+## 15  SBGR-FNLU    I                    495                576
+## 16  SBGR-FNLU    I                    495                428
+## 17  SBGR-FNLU    I                    495                580
+## 18  SBGR-GMMN    I                    535                650
+## 19  SBFZ-GVAC    I                    235                400
+## 20  SBRF-GVAC    I                    240                346
+## 21  SBRF-GVAC    I                    240                354
+## 22  SBRF-GVAC    I                    240             482752
+## 23  SBRF-GVAC    I                    240               1786
+## 24  SBFZ-GVAC    I                    240                352
+## 25  SBRF-GVAC    I                    240                344
+## 26  SBRF-GVAC    I                    240                346
+## 27  SBFZ-GVAC    I                    235                333
+## 28  SBRF-GVAC    I                    240                343
+## 29  SBRF-GVAC    I                    240                355
+## 30  SBFZ-GVAC    I                    235                350
+## 31  SBFZ-GVAC    I                    250                342
+## 32  SBFZ-GVAC    I                    250                338
+## 33  SBFZ-GVAC    I                    250                343
+## 34  SBFZ-GVAC    I                    250                339
+## 35  SBRF-GVAC    I                    245                342
+## 36  SBRF-GVAC    I                    245                356
+## 37  SBFZ-GVAC    I                    250                338
+## 38  SBRF-GVAC    I                    245                351
+## 39  SBFZ-GVAC    I                    250                339
+## 40  SBRF-GVAC    I                    245                342
+## 41  SBFZ-GVAC    I                    250                337
+## 42  SBFZ-GVAC    I                    250                336
+## 43  SBFZ-GVAC    I                    250                120
+## 44  SBRF-GVAC    I                    245                347
+## 45  SBRF-GVAC    I                    245                360
+## 46  SBRF-GVAC    I                    245                349
+## 47  SBRF-GVAC    I                    245                341
+## 48  SBGR-HAAB    I                    720               1058
+## 49  SBGR-KBOS    I                    615                737
+## 50  SBGR-KEWR    I                    575                649
+## 51  SBGR-KEWR    I                    590                675
+## 52  SBRF-KFLL    I                    510                587
+## 53  SBKP-KFLL    I                    540                603
+## 54  SBGR-KIAD    I                    600                662
+## 55  SBGR-KIAD    I                    600                728
+## 56  SBGR-KIAD    I                    600                673
+## 57  SBGR-KIAD    I                    590                666
+## 58  SBGL-KIAH    I                    635                748
+## 59  SBGR-KIAH    I                    610                699
+## 60  SBGL-KIAH    I                    635                403
+## 61  SBGR-KIAH    I                    610                680
+## 62  SBGR-KJFK    I                    590                  0
+## 63  SBGR-KJFK    I                    590                518
+## 64  SPJC-KLAX    I                    515                617
+## 65  SPJC-KLAX    I                    520                620
+## 66  SPJC-KLAX    I                    520                631
+## 67  SBKP-KMCO    I                    545                613
+## 68  SBKP-KMCO    I                    550                619
+## 69  SBGR-KMCO    I                    530                621
+## 70  MDPC-KMCO    I                    185                247
+## 71  SBRF-KMIA    I                    393                485
+## 72  SBGR-KMIA    I                    495                559
+## 73  SBGR-KMIA    I                    500                649
+## 74  SBGR-KMIA    I                    500                568
+## 75  SBGR-LEBL    I                    670                745
+## 76  SBRF-LEMD    I                    465                697
+## 77  SBRF-LEMD    I                    475                682
+## 78  SBRF-LEMD    I                    465                695
+## 79  SBGR-LEMD    I                    610                737
+## 80  SBRF-LEMD    I                    475                613
+## 81  SBGR-LEMD    I                    610                727
+## 82  SBGR-LEMD    I                    610                733
+## 83  SBRF-LEMD    I                    465                690
+## 84  SBRF-LEMD    I                    475                626
+## 85  SBRF-LEMD    I                    465                672
+## 86  SBGR-LEMD    I                    610                712
+## 87  SBRF-LEMD    I                    475                657
+## 88  SBRF-LEMD    I                    465                673
+## 89  SBRF-LEMD    I                    475                674
+## 90  SBRF-LEMD    I                    465                667
+## 91  SBRF-LEMD    I                    475                687
+## 92  SBRF-LEMD    I                    465                673
+## 93  SBRF-LEMD    I                    465                678
+## 94  SBRF-LEMD    I                    475                670
+## 95  SBRF-LEMD    I                    465                686
+## 96  SBRF-LEMD    I                    475                684
+## 97  SBRF-LEMD    I                    475                695
+## 98  SBGR-LEMD    I                    595                506
+## 99  SBRF-LEMD    I                    475                695
+## 100 SBRF-LEMD    I                    475                694
+## 101 SBRF-LEMD    I                    475                676
+## 102 SBRF-LEMD    I                    475                679
+## 103 SBRF-LEMD    I                    475                672
+## 104 SBRF-LEMD    I                    475                653
+## 105 SBRF-LEMD    I                    490                650
+## 106 SBRF-LEMD    I                    490                782
+## 107 SBRF-LEMD    I                    490                702
+## 108 SBRF-LEMD    I                    490                702
+## 109 SBRF-LEMD    I                    490                683
+## 110 SBRF-LEMD    I                    490                712
+## 111 SBRF-LEMD    I                    490                688
+## 112 SBRF-LEMD    I                    490                680
+## 113 SBRF-LEMD    I                    490                696
+## 114 SBRF-LEMD    I                    490                687
+## 115 SBRF-LEMD    I                    490                737
+## 116 SBRF-LEMD    I                    490                742
+## 117 SBRF-LEMD    I                    490                744
+## 118 SBRF-LEMD    I                    490                746
+## 119 SBRF-LEMD    I                    490                742
+## 120 SBRF-LEMD    I                    490                752
+## 121 SBRF-LEMD    I                    490                756
+## 122 SBRF-LEMD    I                    490                743
+## 123 SBRF-LEMD    I                    490                753
+## 124 SBRF-LEMD    I                    490                744
+## 125 SBRF-LEMD    I                    490                741
+## 126 SBGR-LEMD    I                    575               1179
+## 127 SBRF-LEMD    I                    490                738
+## 128 SBSV-LEMD    I                    530                659
+## 129 SBRF-LEMD    I                    490                734
+## 130 SBRF-LEMD    I                    490                730
+## 131 SBRF-LEMD    I                    490                753
+## 132 SBRF-LEMD    I                    490                729
+## 133 SBRF-LEMD    I                    490                732
+## 134 SBRF-LEMD    I                    490                733
+## 135 SBRF-LEMD    I                    490                734
+## 136 SBRF-LEMD    I                    490                738
+## 137 SBRF-LEMD    I                    490                737
+## 138 SBRF-LEMD    I                    490                747
+## 139 SBRF-LEMD    I                    490                740
+## 140 SBRF-LEMD    I                    490                747
+## 141 SBRF-LEMD    I                    490                736
+## 142 SBRF-LEMD    I                    490                743
+## 143 SBRF-LEMD    I                    490                766
+## 144 SBRF-LEMD    I                    490                746
+## 145 SBRF-LEMD    I                    490                752
+## 146 SBRF-LEMD    I                    490                746
+## 147 SBRF-LEMD    I                    490                757
+## 148 SBRF-LEMD    I                    490                758
+## 149 SBRF-LEMD    I                    490                755
+## 150 SBRF-LEMD    I                    490                762
+## 151 SBGR-LEMD    I                    605                698
+## 152 SBRF-LEMD    I                    490                755
+## 153 ZBAA-LEMD    I                    710               1154
+## 154 SBGR-LEMD    I                    605                776
+## 155 SBGR-LEMD    I                    605                752
+## 156 SBRF-LEMD    I                    490                425
+## 157 ZBAA-LEMD    I                    710                872
+## 158 SBRF-LEMD    I                    475                616
+## 159 SBGR-LEMD    I                    610                861
+## 160 SBGR-LEMD    I                    610                690
+## 161 SBRF-LEMD    I                    475                636
+## 162 SBSV-LEMD    I                    510                681
+## 163 SBRF-LEMD    I                    475                675
+## 164 SBGR-LEMD    I                    610                735
+## 165 SBGR-LFPG    I                    680                790
+## 166 SBFZ-LFPG    I                    535                664
+## 167 SBGR-LFPG    I                    685                961
+## 168 SBGR-LIMC    I                    740                668
+## 169 SBGR-LIRF    I                    725                664
+## 170 SBGR-LIRF    I                    600                668
+## 171 SBGR-LIRF    I                    680                835
+## 172 SBGL-LIRF    I                    660                870
+## 173 SBGR-LLBG    I                    810                871
+## 174 SBGL-LPPR    I                    595                504
+## 175 SBRF-LPPT    I                    445                254
+## 176 SBGR-LTBA    I                    735                820
+## 177 SBGR-LTBA    I                    735                800
+## 178 SBGR-MMMX    I                    590                398
+## 179 SBGR-MPTO    I                    420                615
+## 180 SBGL-MPTO    I                    505                413
+## 181 SBGR-MPTO    I                    430                541
+## 182 SBGR-MPTO    I                    427                998
+## 183 SBSV-MPTO    I                    425               1381
+## 184 SBGL-MPTO    I                    445                544
+## 185 SBCF-MPTO    I                    415                145
+## 186 SBGR-MPTO    I                    414                280
+## 187 SBPA-MPTO    I                    437                286
+## 188 SBGR-MPTO    I                    414                269
+## 189 SBBR-MPTO    I                    370                251
+## 190 SBGR-MPTO    I                    415                265
+## 191 SBGR-MPTO    I                    413                295
+## 192 SBBR-MPTO    I                    370               1127
+## 193 SBGL-OMDB    I                    845               1256
+## 194 SBGR-SAAR    I                    185                254
+## 195 SBGR-SABE    I                    115                223
+## 196 SBGR-SABE    I                    115                184
+## 197 SBGR-SABE    I                    115                181
+## 198 SBGL-SABE    I                    135                199
+## 199 SAWH-SABE    I                    205                283
+## 200 SANT-SABE    I                    106                182
+## 201 SBPA-SACO    I                    140                265
+## 202 SBGL-SACO    I                    225                961
+## 203 SBGL-SAEZ    I                    215                372
+## 204 SBGR-SAEZ    I                    115                180
+## 205 SBGR-SAEZ    I                    185                311
+## 206 SBGR-SAEZ    I                    115                177
+## 207 SBGL-SAEZ    I                    140                226
+## 208 SBBR-SAEZ    I                    225                370
+## 209 SBGR-SAEZ    I                    115                176
+## 210 SBGR-SAEZ    I                    115                189
+## 211 SBGL-SAEZ    I                    140                202
+## 212 SBGL-SAEZ    I                    140                222
+## 213 SBGL-SAEZ    I                    140                207
+## 214 SBGR-SAEZ    I                    115                178
+## 215 SBGL-SAEZ    I                    140                202
+## 216 SBSV-SAEZ    I                    210                286
+## 217 SBGR-SAEZ    I                    170               1611
+## 218 SBGR-SAEZ    I                    190                365
+## 219 SBGL-SAEZ    I                    200                119
+## 220 SBGR-SAEZ    I                    185                119
+## 221 SBGR-SAEZ    I                    170                298
+## 222 SBGL-SAEZ    I                    205                326
+## 223 SBGR-SAEZ    I                    180                277
+## 224 SGAS-SAEZ    I                    115                306
+## 225 SBGR-SAEZ    I                    170                249
+## 226 SBGR-SAEZ    I                    185                253
+## 227 SBGL-SAEZ    I                    200                 69
+## 228 SBGR-SAEZ    I                    175                265
+## 229 SCEL-SAME    I                     55                121
+## 230 SABE-SANT    I                    114                182
+## 231 SABE-SAWH    I                    216                291
+## 232 SBGR-SAZS    I                    290                379
+## 233 SBKP-SAZS    I                    295                370
+## 234 SBGR-SBAR    N                    160                507
+## 235 SBCF-SBBE    N                    130                193
+## 236 MPTO-SBBR    I                    310                442
+## 237 SBGL-SBBR    N                    110                406
+## 238 SBPV-SBBR    N                    170                858
+## 239 SBRJ-SBBR    N                    110                456
+## 240 SBRJ-SBBR    N                    110                410
+## 241 SBEG-SBBR    N                    175                895
+## 242 SBRJ-SBBR    N                    110                451
+## 243 SBPA-SBBR    N                    150                317
+## 244 SBGR-SBBR    N                    100                180
+## 245 MPTO-SBBR    I                    382                493
+## 246 SBBR-SBBV    N                    215                484
+## 247 SBGR-SBCF    N                     75                166
+## 248 SBRJ-SBCF    N                     60                154
+## 249 SBKP-SBCF    N                     75                245
+## 250 SBSP-SBCF    N                     75                715
+## 251 LPPT-SBCF    I                    570                665
+## 252 SBRF-SBCF    N                    150                212
+## 253 MPTO-SBCF    I                    411                803
+## 254 MPTO-SBCF    I                    411                663
+## 255 SBGR-SBCG    N                     55                179
+## 256 SBGR-SBCG    N                    115                466
+## 257 SBSP-SBCG    N                    105                347
+## 258 SBSP-SBCG    N                    105                366
+## 259 SBGR-SBCH    N                     95                213
+## 260 SBKP-SBCH    N                     95                158
+## 261 SBGL-SBCT    N                     95                696
+## 262 SBGL-SBCT    N                    100                206
+## 263 SBGL-SBCT    N                    100                205
+## 264 SBRJ-SBCT    N                     85                607
+## 265 SBBR-SBCT    N                    115                431
+## 266 SBKP-SBCT    N                     60                126
+## 267 SBSP-SBCX    N                     90                222
+## 268 SBSP-SBCX    N                     90                510
+## 269 SBGR-SBCY    N                    145                 76
+## 270 SBSI-SBCY    N                     60                160
+## 271 SBSP-SBDN    N                     75                714
+## 272 SBKP-SBDO    N                    135                211
+## 273 KMIA-SBEG    I                    320                383
+## 274 MPTO-SBEG    I                    240                405
+## 275 SBBE-SBEG    N                    130                223
+## 276 SBBR-SBEG    N                    175                240
+## 277 SBGR-SBEG    N                    240                306
+## 278 MPTO-SBEG    I                    240                342
+## 279 SBGR-SBEG    N                    230                297
+## 280 SBGR-SBEG    N                    235               1176
+## 281 SBGL-SBFI    N                    135                197
+## 282 SBGL-SBFL    N                    100                212
+## 283 SBGR-SBFL    N                     75                178
+## 284 SABE-SBFL    I                    180                317
+## 285 SBSP-SBFL    N                     75                157
+## 286 SBGR-SBFL    N                     80                176
+## 287 SBRF-SBFN    N                     70                289
+## 288 SBGR-SBFZ    N                    205                276
+## 289 SBGR-SBFZ    N                    205                276
+## 290 SBGL-SBFZ    N                    140                203
+## 291 SAEZ-SBFZ    I                    305                777
+## 292 LPPT-SBFZ    I                    455                353
+## 293 GVAC-SBFZ    I                    250                110
+## 294 SCEL-SBGL    I                    250                313
+## 295 SACO-SBGL    I                    180                266
+## 296 KMIA-SBGL    I                    500                697
+## 297 SACO-SBGL    I                    180                259
+## 298 SAEZ-SBGL    I                    240                137
+## 299 SACO-SBGL    I                    180                252
+## 300 MPTO-SBGL    I                    375                440
+## 301 KJFK-SBGL    I                    590                654
+## 302 EGLL-SBGL    I                    710             305978
+## 303 KATL-SBGL    I                    578                691
+## 304 SAEZ-SBGL    I                    180                260
+## 305 SBVT-SBGL    N                     65                607
+## 306 SAEZ-SBGL    I                    240                160
+## 307 SAEZ-SBGL    I                    240                165
+## 308 SAEZ-SBGL    I                    240                170
+## 309 SAEZ-SBGL    I                    240                169
+## 310 SBSV-SBGL    N                    130                272
+## 311 SBPA-SBGL    N                    115                679
+## 312 LIRF-SBGL    I                    700                771
+## 313 SBSP-SBGL    N                     60                335
+## 314 SBSV-SBGL    N                    125                326
+## 315 SBGR-SBGL    N                     60                503
+## 316 SBRF-SBGL    N                    180                891
+## 317 SAEZ-SBGL    I                    180                637
+## 318 SBSP-SBGL    N                     65                153
+## 319 MPTO-SBGL    I                    434                563
+## 320 MPTO-SBGL    I                    434                522
+## 321 KIAH-SBGL    I                    610                680
+## 322 GMMN-SBGL    I                    545                449
+## 323 KIAH-SBGL    I                    610                547
+## 324 SPJC-SBGL    I                    295                357
+## 325 SAEZ-SBGL    I                    170               1547
+## 326 FNLU-SBGL    I                    480                637
+## 327 FNLU-SBGL    I                    480                409
+## 328 MPTO-SBGL    I                    431                788
+## 329 MPTO-SBGL    I                    430                755
+## 330 MPTO-SBGL    I                    430                791
+## 331 MPTO-SBGL    I                    430                651
+## 332 SBSL-SBGL    N                    200                273
+## 333 OMDB-SBGL    I                    870                 92
+## 334 OMDB-SBGL    I                    860                 90
+## 335 EHAM-SBGL    I                    715                639
+## 336 LIRF-SBGL    I                    740                957
+## 337 MPTO-SBGL    I                    430                544
+## 338 MPTO-SBGL    I                    434                563
+## 339 KJFK-SBGL    I                    580                664
+## 340 GMMN-SBGL    I                    540                303
+## 341 SBRF-SBGL    N                    180                290
+## 342 SBGL-SBGO    N                    110                180
+## 343 SBSP-SBGO    N                     95                448
+## 344 SBGR-SBGO    N                    100                213
+## 345 MPTO-SBGR    I                    425                487
+## 346 KJFK-SBGR    I                    595                672
+## 347 SBGL-SBGR    N                     75                143
+## 348 KJFK-SBGR    I                    595                669
+## 349 SBPA-SBGR    N                    105                183
+## 350 LEBL-SBGR    I                    690                783
+## 351 MMMX-SBGR    I                    570                823
+## 352 KMIA-SBGR    I                    510                587
+## 353 SBFL-SBGR    N                     80                170
+## 354 KJFK-SBGR    I                    595                666
+## 355 KJFK-SBGR    I                    595                661
+## 356 SLVR-SBGR    I                    155                340
+## 357 LEMD-SBGR    I                    655                716
+## 358 LSZH-SBGR    I                    725                567
+## 359 SKBO-SBGR    I                    375                313
+## 360 SBEG-SBGR    N                    260                159
+## 361 LFPG-SBGR    I                    715                803
+## 362 SBCF-SBGR    N                     65                126
+## 363 SBFL-SBGR    N                     80                146
+## 364 HAAB-SBGR    I                    750                959
+## 365 LEMD-SBGR    I                    620                715
+## 366 SBSV-SBGR    N                    160                234
+## 367 SBSG-SBGR    N                    205                272
+## 368 SBSV-SBGR    N                    155                217
+## 369 SBCT-SBGR    N                     70                154
+## 370 SBBR-SBGR    N                    100                171
+## 371 SBSG-SBGR    N                    210                278
+## 372 SBCF-SBGR    N                     80                153
+## 373 SBMO-SBGR    N                    180                247
+## 374 SBSV-SBGR    N                    150                213
+## 375 SBGO-SBGR    N                    105                175
+## 376 SBGL-SBGR    N                     75                186
+## 377 SAEZ-SBGR    I                    100                208
+## 378 HAAB-SBGR    I                    750                918
+## 379 FAOR-SBGR    I                    600                674
+## 380 SLVR-SBGR    I                    155                345
+## 381 SBPS-SBGR    N                    125                196
+## 382 SBMO-SBGR    N                    185                250
+## 383 SBBR-SBGR    N                    110                186
+## 384 MMMX-SBGR    I                    570                796
+## 385 LFPG-SBGR    I                    720                799
+## 386 KJFK-SBGR    I                    595                662
+## 387 LLBG-SBGR    I                    910                972
+## 388 SBMO-SBGR    N                    180                241
+## 389 LIMC-SBGR    I                    765                887
+## 390 SBMG-SBGR    N                     90                786
+## 391 MPTO-SBGR    I                    365                471
+## 392 SBKG-SBGR    N                    195                280
+## 393 SBSV-SBGR    N                    160                224
+## 394 SLVR-SBGR    I                    155                260
+## 395 CYYZ-SBGR    I                    600                532
+## 396 FAOR-SBGR    I                    680                591
+## 397 SBFZ-SBGR    N                    215                471
+## 398 MPTO-SBGR    I                    420                542
+## 399 SBAR-SBGR    N                    170                594
+## 400 SBPA-SBGR    N                    100                171
+## 401 CYYZ-SBGR    I                    600                531
+## 402 CYYZ-SBGR    I                    600                665
+## 403 SBFZ-SBGR    N                    215                288
+## 404 SBPA-SBGR    N                    105                210
+## 405 KJFK-SBGR    I                    605                669
+## 406 KJFK-SBGR    I                    580                664
+## 407 SLVR-SBGR    I                    175                316
+## 408 SLVR-SBGR    I                    155                455
+## 409 MMMX-SBGR    I                    580                734
+## 410 SBGL-SBGR    N                     80                787
+## 411 SBCX-SBGR    N                     95                393
+## 412 MPTO-SBGR    I                    415                580
+## 413 SAEZ-SBGR    I                    165                226
+## 414 SBBE-SBGR    N                    220                283
+## 415 SLVR-SBGR    I                    155                225
+## 416 MPTO-SBGR    I                    415                535
+## 417 SABE-SBGR    I                    225                155
+## 418 KJFK-SBGR    I                    570                655
+## 419 MPTO-SBGR    I                    415                348
+## 420 SBPL-SBGR    N                    165                295
+## 421 MPTO-SBGR    I                    415                350
+## 422 KLAX-SBGR    I                    725                812
+## 423 SLCB-SBGR    I                    185                380
+## 424 LIRF-SBGR    I                    720                806
+## 425 LIMC-SBGR    I                    745                814
+## 426 SBPL-SBGR    N                    165                279
+## 427 LPPT-SBGR    I                    600                665
+## 428 SLVR-SBGR    I                    160                259
+## 429 SKBO-SBGR    I                    370                438
+## 430 MPTO-SBGR    I                    355                422
+## 431 SKBO-SBGR    I                    370                436
+## 432 SEQM-SBGR    I                    365               1042
+## 433 SBPV-SBGR    N                    225                414
+## 434 SLVR-SBGR    I                    160                286
+## 435 MPTO-SBGR    I                    355                420
+## 436 SLVR-SBGR    I                    160                225
+## 437 SLCB-SBGR    I                    185                410
+## 438 LEMD-SBGR    I                    600                538
+## 439 LPPR-SBGR    I                    640                702
+## 440 GMMN-SBGR    I                    560                685
+## 441 MPTO-SBGR    I                    425                500
+## 442 KJFK-SBGR    I                    585                665
+## 443 KDFW-SBGR    I                    615                701
+## 444 KJFK-SBGR    I                    614                740
+## 445 HAAB-SBGR    I                    750                681
+## 446 KMIA-SBGR    I                    505                593
+## 447 SBPA-SBGR    N                    110                205
+## 448 KIAH-SBGR    I                    605                704
+## 449 FAOR-SBGR    I                    665                768
+## 450 OTHH-SBGR    I                    970                810
+## 451 SAEZ-SBGR    I                    160                923
+## 452 SLVR-SBGR    I                    160                285
+## 453 KMIA-SBGR    I                    505                572
+## 454 OTHH-SBGR    I                    970                841
+## 455 SBCY-SBGR    N                    140                243
+## 456 SBFZ-SBGR    N                    205                274
+## 457 EGLL-SBGR    I                    730                667
+## 458 KJFK-SBGR    I                    610                672
+## 459 LIRF-SBGR    I                    775                704
+## 460 EDDF-SBGR    I                    710                864
+## 461 SAEZ-SBGR    I                    155                547
+## 462 KJFK-SBGR    I                    600                680
+## 463 SLVR-SBGR    I                    160                267
+## 464 GMMN-SBGR    I                    560               1978
+## 465 LEBL-SBGR    I                    690                628
+## 466 SLVR-SBGR    I                    160                245
+## 467 SLCB-SBGR    I                    185                250
+## 468 SLVR-SBGR    I                    160                225
+## 469 KJFK-SBGR    I                    610                549
+## 470 KBOS-SBGR    I                    625                695
+## 471 KMIA-SBGR    I                    505                584
+## 472 KEWR-SBGR    I                    580                660
+## 473 SLVR-SBGR    I                    160                256
+## 474 MMMX-SBGR    I                    590                655
+## 475 OTHH-SBGR    I                    970                894
+## 476 MMMX-SBGR    I                    590                664
+## 477 LEMD-SBGR    I                    600                671
+## 478 MMMX-SBGR    I                    590                488
+## 479 KJFK-SBGR    I                    610                694
+## 480 KJFK-SBGR    I                    575                673
+## 481 KJFK-SBGR    I                    610                677
+## 482 KJFK-SBGR    I                    585                687
+## 483 SBNF-SBGR    N                     80                149
+## 484 LIRF-SBGR    I                    720                928
+## 485 CYYZ-SBGR    I                    595                657
+## 486 FAOR-SBGR    I                    590                679
+## 487 SAEZ-SBGR    I                    155                243
+## 488 SBRB-SBGR    N                    240                306
+## 489 EGLL-SBGR    I                    720                654
+## 490 MPTO-SBGR    I                    423                749
+## 491 FNLU-SBGR    I                    480                544
+## 492 HAAB-SBGR    I                    780                711
+## 493 SLVR-SBGR    I                    160                250
+## 494 LEMD-SBGR    I                    655                775
+## 495 SBFZ-SBGR    N                    210                271
+## 496 SBUL-SBGR    N                     95                170
+## 497 SKBO-SBGR    I                    370                445
+## 498 LEMD-SBGR    I                    655                791
+## 499 SBGL-SBGR    N                     75                139
+## 500 MPTO-SBGR    I                    429                549
+## 501 MPTO-SBGR    I                    427                539
+## 502 MPTO-SBGR    I                    423                553
+## 503 MPTO-SBGR    I                    434                546
+## 504 CYYZ-SBGR    I                    595                682
+## 505 SLVR-SBGR    I                    160                240
+## 506 KBOS-SBGR    I                    615                691
+## 507 KJFK-SBGR    I                    585                659
+## 508 KJFK-SBGR    I                    603                671
+## 509 LIRF-SBGR    I                    740                529
+## 510 LIRF-SBGR    I                    740                137
+## 511 SAEZ-SBGR    I                    165                374
+## 512 SKBO-SBGR    I                    370                454
+## 513 MPTO-SBGR    I                    439                555
+## 514 SBBR-SBGR    N                    105                173
+## 515 KEWR-SBGR    I                    575                734
+## 516 MPTO-SBGR    I                    427                651
+## 517 SLVR-SBGR    I                    160                230
+## 518 SBSI-SBGR    N                    155                304
+## 519 SBCF-SBGV    N                     55                130
+## 520 SBSN-SBHT    N                     50                115
+## 521 SBEG-SBIH    N                     70                152
+## 522 SBSV-SBJP    N                     85                185
+## 523 SBGR-SBJP    N                    190               1086
+## 524 SBGR-SBJU    N                    180                243
+## 525 SBGR-SBJU    N                    180                250
+## 526 SBGR-SBKG    N                    190                251
+## 527 SBPA-SBKP    N                    100                161
+## 528 KFLL-SBKP    I                    510                572
+## 529 KFLL-SBKP    I                    505                571
+## 530 SBGL-SBKP    N                     75                424
+## 531 SBPA-SBKP    N                    110                221
+## 532 LFPO-SBKP    I                    720                641
+## 533 SBCF-SBKP    N                     80                147
+## 534 SBCY-SBKP    N                    125                209
+## 535 SBGL-SBKP    N                     75                185
+## 536 SBSR-SBKP    N                     65                143
+## 537 SBBR-SBKP    N                    100              31560
+## 538 SBSR-SBKP    N                     65                141
+## 539 SBMG-SBKP    N                     90                171
+## 540 SBLO-SBKP    N                     80                147
+## 541 SBPS-SBKP    N                    135                222
+## 542 SBRP-SBKP    N                     55                117
+## 543 SBBR-SBKP    N                    100                164
+## 544 SBCT-SBLJ    N                     65                143
+## 545 SBSP-SBLO    N                     70                479
+## 546 SBGR-SBMG    N                     75                376
+## 547 SBSP-SBMG    N                     80                621
+## 548 SBCT-SBMG    N                     75                141
+## 549 SBGR-SBMO    N                    110                196
+## 550 SBSP-SBNF    N                     60                142
+## 551 SBSP-SBNF    N                     65               1515
+## 552 SBPA-SBNF    N                     80                160
+## 553 MPTO-SBPA    I                    413                479
+## 554 MPTO-SBPA    I                    413                491
+## 555 SAEZ-SBPA    I                    155                 93
+## 556 SBGR-SBPA    N                    100                161
+## 557 SBSP-SBPA    N                    105                309
+## 558 SBCT-SBPA    N                     75                200
+## 559 SBSP-SBPA    N                    100                367
+## 560 MPTO-SBPA    I                    413                583
+## 561 SBNF-SBPA    N                     85                165
+## 562 LPPT-SBPA    I                    680                817
+## 563 SBSP-SBPA    N                    100                177
+## 564 SBFL-SBPA    N                     60                134
+## 565 SBCT-SBPA    N                     70                155
+## 566 SBGR-SBPA    N                    110                180
+## 567 SBGR-SBPA    N                    100                206
+## 568 SBSP-SBPA    N                    100                195
+## 569 SBSP-SBPA    N                    105                171
+## 570 SUMU-SBPA    I                     80                172
+## 571 SBGR-SBPA    N                    105                245
+## 572 SBKP-SBPA    N                    100                171
+## 573 SBGL-SBPA    N                    130                208
+## 574 SBSP-SBPA    N                    105                233
+## 575 SBSM-SBPA    N                     50                148
+## 576 SBKP-SBPA    N                    110                175
+## 577 SBSP-SBPA    N                    105                184
+## 578 MPTO-SBPA    I                    427                680
+## 579 MPTO-SBPA    I                    427                904
+## 580 SBBR-SBPJ    N                     75                206
+## 581 SBGR-SBPL    N                    160                368
+## 582 SACO-SBPS    I                    305                241
+## 583 SBGR-SBPS    N                    105                248
+## 584 SBSV-SBPS    N                     60                122
+## 585 SBBR-SBPV    N                    180                279
+## 586 SBSV-SBQV    N                     80                163
+## 587 EDDF-SBRF    I                    625               1806
+## 588 SBGR-SBRF    N                    185                247
+## 589 SBGR-SBRF    N                    125                195
+## 590 SBSP-SBRF    N                    185                268
+## 591 MPTO-SBRF    I                    441                578
+## 592 SBSP-SBRF    N                    185                505
+## 593 LEMD-SBRF    I                    500                433
+## 594 LEMD-SBRF    I                    500                240
+## 595 LEMD-SBRF    I                    500                233
+## 596 LEMD-SBRF    I                    500                234
+## 597 LEMD-SBRF    I                    500                221
+## 598 EDDF-SBRF    I                    610                269
+## 599 MPTO-SBRF    I                    439                554
+## 600 SBSP-SBRJ    N                     60                129
+## 601 SBSP-SBRJ    N                     60                133
+## 602 SBSP-SBRJ    N                     60                404
+## 603 SBSP-SBRJ    N                     60                163
+## 604 SBSP-SBRJ    N                     60                194
+## 605 SBSP-SBRJ    N                     60                372
+## 606 SBSP-SBRJ    N                     60                122
+## 607 SBBR-SBRJ    N                    105                387
+## 608 SBPA-SBRJ    N                    110                223
+## 609 SBSP-SBRJ    N                     60                165
+## 610 SBSP-SBRJ    N                     60                143
+## 611 SBBR-SBRJ    N                    105                259
+## 612 SBPA-SBRJ    N                    110                172
+## 613 SBKP-SBRJ    N                     60                131
+## 614 SBGR-SBRJ    N                     60                121
+## 615 SBGO-SBRP    N                     80                172
+## 616 SBSP-SBRP    N                     70                131
+## 617 SBGR-SBSG    N                    135                225
+## 618 SBFZ-SBSL    N                     75                151
+## 619 SBBR-SBSL    N                    145                207
+## 620 SBFZ-SBSL    N                     75                138
+## 621 SBEG-SBSN    N                     70                173
+## 622 SBSV-SBSP    N                    155                227
+## 623 SBSV-SBSP    N                    150                215
+## 624 SBPS-SBSP    N                    130                191
+## 625 SBRJ-SBSP    N                     60                134
+## 626 SBCT-SBSP    N                     60                135
+## 627 SBCT-SBSP    N                     60                131
+## 628 SBZM-SBSP    N                     70                193
+## 629 SBCF-SBSP    N                     80                151
+## 630 SBCT-SBSP    N                     60                134
+## 631 SBJV-SBSP    N                     55                271
+## 632 SBPA-SBSP    N                     90                371
+## 633 SBRJ-SBSP    N                     60                436
+## 634 SBCF-SBSP    N                     75                241
+## 635 SBCF-SBSP    N                     75                175
+## 636 SBLO-SBSP    N                     70                384
+## 637 SBCT-SBSP    N                     60                194
+## 638 SBBR-SBSP    N                    105                385
+## 639 SBRJ-SBSP    N                     60                252
+## 640 SBRJ-SBSP    N                     60                126
+## 641 SBRJ-SBSP    N                     70                147
+## 642 SBBR-SBSP    N                    105                166
+## 643 SBFL-SBSP    N                     65                282
+## 644 SBGO-SBSP    N                     95                331
+## 645 SBBR-SBSP    N                    105                296
+## 646 SBRJ-SBSP    N                     65                152
+## 647 SBAE-SBSP    N                     60                121
+## 648 SBRJ-SBSP    N                     60                123
+## 649 SBKP-SBSR    N                     75                143
+## 650 SAEZ-SBSV    I                    265                339
+## 651 SBCF-SBSV    N                    100                170
+## 652 SBSP-SBSV    N                    140                294
+## 653 MPTO-SBSV    I                    424                909
+## 654 GVAC-SBSV    I                    315                177
+## 655 SBEG-SBTB    N                     70                210
+## 656 SBGR-SBUL    N                     75                189
+## 657 SBCF-SBUL    N                     95                195
+## 658 SBSP-SBUL    N                     75                136
+## 659 SBSP-SBUL    N                     80                161
+## 660 SBKP-SBVT    N                     90                153
+## 661 SBGR-SBVT    N                     90                154
+## 662 SBGL-SBVT    N                     65                198
+## 663 SBRJ-SBVT    N                     60                124
+## 664 SBGL-SCEL    I                    245                325
+## 665 SBGL-SCEL    I                    215                298
+## 666 SBGL-SCEL    I                    215                301
+## 667 SBGL-SCEL    I                    215                288
+## 668 SBGL-SCEL    I                    205                275
+## 669 SBGL-SCEL    I                    205                268
+## 670 SBCT-SGAS    I                    100                216
+## 671 SBGR-SGAS    I                    125                262
+## 672 SBGR-SLVR    I                    180                 38
+## 673 SBGR-SLVR    I                    170                253
+## 674 SBBE-SMJP    I                    115                277
+## 675 KMIA-SPJC    I                    350                431
+## 676 SBFL-SUMU    I                    115                304
+## 677 SBEG-SWCA    N                     65                135
+##                                                                       observation
+## 1                                                 ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 2                                                             CONEXÃO DE AERONAVE
+## 3                                                 ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 4                                                 ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 5                                                             CONEXÃO DE AERONAVE
+## 6                                                 ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 7                                                 ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 8                                                 ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 9                                                 ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 10                                                           DEFEITOS DA AERONAVE
+## 11                                      LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 12                                                           DEFEITOS DA AERONAVE
+## 13                                                                     AUTORIZADO
+## 14                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 15                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 16                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 17                                      LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 18                                                                           <NA>
+## 19                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 20                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 21                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 22                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 23                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 24                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 25                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 26                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 27                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 28                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 29                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 30                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 31                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 32                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 33                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 34                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 35                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 36                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 37                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 38                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 39                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 40                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 41                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 42                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 43                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 44                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 45                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 46                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 47                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 48                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 49                                      LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 50                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 51                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 52                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 53                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 54                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 55                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 56                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 57                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 58                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 59                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 60                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 61                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 62                                                            CONEXÃO DE AERONAVE
+## 63                                                            CONEXÃO DE AERONAVE
+## 64                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 65                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 66                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 67                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 68                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 69                                      LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 70                                                ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 71                                      LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 72                   OPERAÇÃO DE VOO COM MAIS DE 04 HORAS DE ATRASO PANE AERONAVE
+## 73                                      LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 74                                      LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 75                                                                     AUTORIZADO
+## 76                                                     SEGURANÇA/PAX/CARGA/ALARME
+## 77                                          AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 78                                          AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 79                                          AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 80                                          AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 81                                                            CONEXÃO DE AERONAVE
+## 82                                          AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 83                                                            CONEXÃO DE AERONAVE
+## 84                                                            CONEXÃO DE AERONAVE
+## 85                                                            CONEXÃO DE AERONAVE
+## 86                                          AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 87                                                           DEFEITOS DA AERONAVE
+## 88                                                     SEGURANÇA/PAX/CARGA/ALARME
+## 89                                                            CONEXÃO DE AERONAVE
+## 90                                          AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 91                                                            CONEXÃO DE AERONAVE
+## 92                                                            CONEXÃO DE AERONAVE
+## 93                                                            CONEXÃO DE AERONAVE
+## 94                                                            CONEXÃO DE AERONAVE
+## 95                                                     SEGURANÇA/PAX/CARGA/ALARME
+## 96                                                            CONEXÃO DE AERONAVE
+## 97                                                            CONEXÃO DE AERONAVE
+## 98                                                           DEFEITOS DA AERONAVE
+## 99                                                            CONEXÃO DE AERONAVE
+## 100                                                           CONEXÃO DE AERONAVE
+## 101                                                          DEFEITOS DA AERONAVE
+## 102                                                           CONEXÃO DE AERONAVE
+## 103                                                           CONEXÃO DE AERONAVE
+## 104                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 105                                                           CONEXÃO DE AERONAVE
+## 106                                                           CONEXÃO DE AERONAVE
+## 107                                                          DEFEITOS DA AERONAVE
+## 108                                                           CONEXÃO DE AERONAVE
+## 109                                                           CONEXÃO DE AERONAVE
+## 110                                                           CONEXÃO DE AERONAVE
+## 111                                                           CONEXÃO DE AERONAVE
+## 112                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 113                                                           CONEXÃO DE AERONAVE
+## 114                                                           CONEXÃO DE AERONAVE
+## 115                                                           CONEXÃO DE AERONAVE
+## 116                                                          DEFEITOS DA AERONAVE
+## 117                                                           CONEXÃO DE AERONAVE
+## 118                                                      PLANO DE VOO - APROVAÇÃO
+## 119                                                           CONEXÃO DE AERONAVE
+## 120                                                           CONEXÃO DE AERONAVE
+## 121                                                           CONEXÃO DE AERONAVE
+## 122                                                           CONEXÃO DE AERONAVE
+## 123                                                           CONEXÃO DE AERONAVE
+## 124                                                           CONEXÃO DE AERONAVE
+## 125                                                           CONEXÃO DE AERONAVE
+## 126                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 127                                                           CONEXÃO DE AERONAVE
+## 128                                                           CONEXÃO DE AERONAVE
+## 129                                                           CONEXÃO DE AERONAVE
+## 130                                                           CONEXÃO DE AERONAVE
+## 131                                                           CONEXÃO DE AERONAVE
+## 132                                                           CONEXÃO DE AERONAVE
+## 133                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 134                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 135                                                           CONEXÃO DE AERONAVE
+## 136                                                           CONEXÃO DE AERONAVE
+## 137                                                           CONEXÃO DE AERONAVE
+## 138                                                          DEFEITOS DA AERONAVE
+## 139                                                           CONEXÃO DE AERONAVE
+## 140                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 141                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 142                                                           CONEXÃO DE AERONAVE
+## 143                                                           CONEXÃO DE AERONAVE
+## 144                                                           CONEXÃO DE AERONAVE
+## 145                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 146                                                           CONEXÃO DE AERONAVE
+## 147                                                           CONEXÃO DE AERONAVE
+## 148                                                           CONEXÃO DE AERONAVE
+## 149                                                           CONEXÃO DE AERONAVE
+## 150                                                           CONEXÃO DE AERONAVE
+## 151                                                           CONEXÃO DE AERONAVE
+## 152                                                           CONEXÃO DE AERONAVE
+## 153                                                           CONEXÃO DE AERONAVE
+## 154                                                           CONEXÃO DE AERONAVE
+## 155                                                           CONEXÃO DE AERONAVE
+## 156                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 157                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 158                                                           CONEXÃO DE AERONAVE
+## 159                                                           CONEXÃO DE AERONAVE
+## 160                                                           CONEXÃO DE AERONAVE
+## 161                                                           CONEXÃO DE AERONAVE
+## 162                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 163                                                           CONEXÃO DE AERONAVE
+## 164                                                          DEFEITOS DA AERONAVE
+## 165                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 166                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 167                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 168                                                          DEFEITOS DA AERONAVE
+## 169                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 170                                                           CONEXÃO DE AERONAVE
+## 171                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 172                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 173                                                      PLANO DE VOO - APROVAÇÃO
+## 174                                                          DEFEITOS DA AERONAVE
+## 175                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 176                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 177                                                           CONEXÃO DE AERONAVE
+## 178                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 179                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 180                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 181                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 182                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 183                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 184                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 185                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 186                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 187                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 188                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 189                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 190                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 191                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 192                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 193                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 194                                                                    AUTORIZADO
+## 195                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 196                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 197                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 198                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 199                                                           CONEXÃO DE AERONAVE
+## 200                                                           CONEXÃO DE AERONAVE
+## 201                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 202                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 203                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 204                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 205                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 206                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 207                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 208                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 209                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 210                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 211                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 212                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 213                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 214                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 215                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 216                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 217                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 218                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 219                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 220                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 221                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 222                                                           CONEXÃO DE AERONAVE
+## 223                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 224                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 225                                                           CONEXÃO DE AERONAVE
+## 226                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 227                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 228                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 229                                                                    AUTORIZADO
+## 230                                   REMOÇÃO GELO/ÁGUA/LAMA/AREIA - EM AEROPORTO
+## 231                                   REMOÇÃO GELO/ÁGUA/LAMA/AREIA - EM AEROPORTO
+## 232                                                                          <NA>
+## 233                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 234                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 235                              ATRASO DEVIDO RETORNO - CONDIÇÕES METEOROLÓGICAS
+## 236                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 237                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 238                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 239                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 240                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 241                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 242                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 243                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 244                                                          DEFEITOS DA AERONAVE
+## 245                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 246                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 247                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 248   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 249                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 250                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 251                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 252                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 253                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 254                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 255                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 256                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 257                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 258                                FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 259                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 260                                                          DEFEITOS DA AERONAVE
+## 261                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 262                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 263                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 264                                                      PLANO DE VOO - APROVAÇÃO
+## 265                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 266                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 267                                                      PLANO DE VOO - APROVAÇÃO
+## 268                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 269                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 270                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 271                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 272                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 273                                                           CONEXÃO DE AERONAVE
+## 274                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 275                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 276                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 277                                                     ABASTECIMENTO/DESTANQUEIO
+## 278                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 279                                                           CONEXÃO DE AERONAVE
+## 280                                                                    AUTORIZADO
+## 281                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 282                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 283                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 284                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 285                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 286                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 287                                                          DEFEITOS DA AERONAVE
+## 288                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 289                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 290                                               AVARIA DURANTE OPERAÇÕES EM VOO
+## 291                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 292                                                             TROCA DE AERONAVE
+## 293                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 294                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 295                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 296                  OPERAÇÃO DE VOO COM MAIS DE 04 HORAS DE ATRASO PANE AERONAVE
+## 297                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 298                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 299                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 300                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 301                                DEGELO E REMOÇÃO DE NEVE E/OU LAMA EM AERONAVE
+## 302                                                          DEFEITOS DA AERONAVE
+## 303                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 304                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 305                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 306                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 307                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 308                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 309                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 310                                FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 311                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 312                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 313                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 314      CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 315                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 316                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 317                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 318                                   REMOÇÃO GELO/ÁGUA/LAMA/AREIA - EM AEROPORTO
+## 319                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 320                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 321                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 322                                                           CONEXÃO DE AERONAVE
+## 323                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 324                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 325                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 326                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 327                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 328                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 329                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 330                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 331                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 332                                                           CONEXÃO DE AERONAVE
+## 333                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 334                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 335                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 336                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 337                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 338                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 339                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 340                                                           CONEXÃO DE AERONAVE
+## 341                               FALHA EQUIPO AUTOMOTIVO E DE ATENDIMENTO DE PAX
+## 342                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 343                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 344                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 345                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 346                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 347                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 348                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 349                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 350                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 351                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 352                    ATRASO AEROPORTO DE ALTERNATIVA - CONDIÇÕES METEOROLÓGICAS
+## 353                    ATRASO AEROPORTO DE ALTERNATIVA - CONDIÇÕES METEOROLÓGICAS
+## 354                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 355                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 356                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 357                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 358                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 359                                                           CONEXÃO DE AERONAVE
+## 360                                                           CONEXÃO DE AERONAVE
+## 361                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 362                                                           CONEXÃO DE AERONAVE
+## 363                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 364                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 365                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 366      CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 367                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 368                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 369                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 370                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 371                    ATRASO AEROPORTO DE ALTERNATIVA - CONDIÇÕES METEOROLÓGICAS
+## 372                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 373                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 374                                                           CONEXÃO DE AERONAVE
+## 375                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 376                                                                    AUTORIZADO
+## 377                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 378                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 379                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 380                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 381                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 382                    ATRASO AEROPORTO DE ALTERNATIVA - CONDIÇÕES METEOROLÓGICAS
+## 383                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 384                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 385                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 386                                                                    AUTORIZADO
+## 387                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 388                                                          DEFEITOS DA AERONAVE
+## 389                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 390                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 391                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 392                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 393                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 394                                                           CONEXÃO DE AERONAVE
+## 395                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 396                                                           CONEXÃO DE AERONAVE
+## 397                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 398                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 399                                                          DEFEITOS DA AERONAVE
+## 400                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 401                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 402                                                          DEFEITOS DA AERONAVE
+## 403                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 404                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 405                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 406                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 407                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 408                                                          DEFEITOS DA AERONAVE
+## 409                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 410                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 411                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 412                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 413                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 414                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 415                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 416                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 417                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 418                                                          DEFEITOS DA AERONAVE
+## 419                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 420                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 421                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 422                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 423                                                          DEFEITOS DA AERONAVE
+## 424                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 425                                                          DEFEITOS DA AERONAVE
+## 426                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 427                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 428                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 429                    ATRASO AEROPORTO DE ALTERNATIVA - CONDIÇÕES METEOROLÓGICAS
+## 430                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 431                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 432                                                           CONEXÃO DE AERONAVE
+## 433                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 434                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 435                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 436                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 437                                                          DEFEITOS DA AERONAVE
+## 438                                                           CONEXÃO DE AERONAVE
+## 439                                                             TROCA DE AERONAVE
+## 440                                                           CONEXÃO DE AERONAVE
+## 441                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 442                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 443                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 444                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 445                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 446                                                           CONEXÃO DE AERONAVE
+## 447                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 448                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 449                                                          DEFEITOS DA AERONAVE
+## 450                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 451                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 452                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 453                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 454                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 455                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 456                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 457                                                          DEFEITOS DA AERONAVE
+## 458                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 459                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 460                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 461                               FALHA EQUIPO AUTOMOTIVO E DE ATENDIMENTO DE PAX
+## 462                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 463                                                             TROCA DE AERONAVE
+## 464                                                           CONEXÃO DE AERONAVE
+## 465                                                          DEFEITOS DA AERONAVE
+## 466                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 467                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 468                                                          DEFEITOS DA AERONAVE
+## 469                                                           CONEXÃO DE AERONAVE
+## 470                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 471                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 472                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 473                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 474                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 475                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 476                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 477                                                      PLANO DE VOO - APROVAÇÃO
+## 478                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 479                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 480                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 481                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 482                                                           CONEXÃO DE AERONAVE
+## 483                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 484                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 485                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 486                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 487                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 488                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 489                                               AVARIA DURANTE OPERAÇÕES EM VOO
+## 490                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 491                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 492                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 493                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 494                                                          DEFEITOS DA AERONAVE
+## 495                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 496                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 497                                               AEROPORTO DE ORIGEM INTERDITADO
+## 498                                                    SEGURANÇA/PAX/CARGA/ALARME
+## 499                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 500                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 501                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 502                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 503                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 504                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 505                                                             TROCA DE AERONAVE
+## 506                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 507                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 508                                DEGELO E REMOÇÃO DE NEVE E/OU LAMA EM AERONAVE
+## 509                                                             TROCA DE AERONAVE
+## 510                                                      MIGRAÇÃO/ALFÂNDEGA/SAÚDE
+## 511                    ATRASO AEROPORTO DE ALTERNATIVA - CONDIÇÕES METEOROLÓGICAS
+## 512                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 513                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 514                                                           CONEXÃO DE AERONAVE
+## 515                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 516                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 517                                                             TROCA DE AERONAVE
+## 518                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 519                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 520                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 521                              ATRASO DEVIDO RETORNO - CONDIÇÕES METEOROLÓGICAS
+## 522                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 523                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 524   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 525                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 526                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 527                                                           CONEXÃO DE AERONAVE
+## 528                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 529                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 530                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 531                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 532                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 533                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 534                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 535                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 536                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 537                                             ANTECIPAÇÃO DE HORÁRIO AUTORIZADA
+## 538                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 539      CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 540                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 541                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 542   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 543                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 544                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 545                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 546                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 547                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 548                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 549      CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 550                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 551      CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 552                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 553                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 554                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 555                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 556                                              AEROPORTO DE DESTINO INTERDITADO
+## 557                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 558                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 559                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 560                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 561                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 562                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 563                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 564                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 565                                                           CONEXÃO DE AERONAVE
+## 566                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 567                                FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 568                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 569                                                          DEFEITOS DA AERONAVE
+## 570                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 571                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 572                                                           CONEXÃO DE AERONAVE
+## 573                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 574                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 575                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 576                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 577                                FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 578                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 579                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 580                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 581                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 582                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 583                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 584                                                          DEFEITOS DA AERONAVE
+## 585                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 586                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 587                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 588      CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 589                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 590                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 591                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 592                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 593                                                      MIGRAÇÃO/ALFÂNDEGA/SAÚDE
+## 594                                                          DEFEITOS DA AERONAVE
+## 595                                                           CONEXÃO DE AERONAVE
+## 596                                FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 597                                               AVARIA DURANTE OPERAÇÕES EM VOO
+## 598                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 599                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 600                                              AEROPORTO DE DESTINO INTERDITADO
+## 601                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 602                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 603                               FALHA EQUIPO AUTOMOTIVO E DE ATENDIMENTO DE PAX
+## 604 INCLUSÃO DE ETAPA (AEROPORTO DE ALTERNATIVA) DEVIDO A UM VOO ESPECIAL RETORNO
+## 605                                                          DEFEITOS DA AERONAVE
+## 606   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 607                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 608                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 609                               FALHA EQUIPO AUTOMOTIVO E DE ATENDIMENTO DE PAX
+## 610                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 611                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 612                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 613                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 614                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 615                                                           CONEXÃO DE AERONAVE
+## 616   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 617                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 618                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 619                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 620                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 621                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 622                                                           CONEXÃO DE AERONAVE
+## 623      CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 624                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 625                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 626                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 627                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 628                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 629                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 630                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 631   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 632   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 633   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 634                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 635                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 636                                                           CONEXÃO DE AERONAVE
+## 637                                                           CONEXÃO DE AERONAVE
+## 638                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 639                                FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 640                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 641                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 642   CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO CONDIÇÕES METEOROLÓGICAS
+## 643                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 644                               FALHA EQUIPO AUTOMOTIVO E DE ATENDIMENTO DE PAX
+## 645                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 646                                          AEROPORTO DESTINO ABAIXO DOS LIMITES
+## 647                                                           CONEXÃO DE AERONAVE
+## 648                                FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 649                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 650                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 651                                                          DEFEITOS DA AERONAVE
+## 652                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 653                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 654                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 655                              ATRASO DEVIDO RETORNO - CONDIÇÕES METEOROLÓGICAS
+## 656                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 657                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 658                                FACILIDADES DO AEROPORTO - RESTRIÇÕES DE APOIO
+## 659                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 660      CONEXÃO AERONAVE/VOLTA - VOO DE IDA NÃO PENALIZADO AEROPORTO INTERDITADO
+## 661                                           AEROPORTO ORIGEM ABAIXO DOS LIMITES
+## 662                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 663                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 664                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 665                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 666                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 667                                                           CONEXÃO DE AERONAVE
+## 668                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 669                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 670            ANTECIPAÇÃO DE HORÁRIO AUTORIZADA - ESPECÍFICO VOOS INTERNACIONAIS
+## 671                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 672                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 673                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+## 674                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 675                                     LIBERAÇÃO SERV. TRAFEGO AÉREO/ANTECIPAÇÃO
+## 676                                         AEROPORTO COM RESTRIÇÕES OPERACIONAIS
+## 677                                               ATRASOS NÃO ESPECÍFICOS, OUTROS
+\end{verbatim}
+
+aqui podemos observar que mesmo com a demora para o voo sair e chegar a
+maior parte dos voos não tem tanta diferença de voo, porém se observamos
+os voos que tem uma janela de mais de 1 hora de expectativa de chegada
+temos o seguinte grafico
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{obs\_counts }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}
+\NormalTok{    delay\_arrival }\SpecialCharTok{\textgreater{}} \DecValTok{60}\NormalTok{,}
+    \SpecialCharTok{!}\NormalTok{type }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"L"}\NormalTok{),}
+    \FunctionTok{abs}\NormalTok{(expected\_flight\_length }\SpecialCharTok{{-}}\NormalTok{ real\_flight\_length) }\SpecialCharTok{\textgreater{}} \DecValTok{60}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(obs\_categoria, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(obs\_counts, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(obs\_categoria, n), }\AttributeTok{y =}\NormalTok{ n)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ n), }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\AttributeTok{size =} \FloatTok{3.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Observações para voos com grande discrepância de tempo"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Observação"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Contagem"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{),}
+    \AttributeTok{plot.margin =} \FunctionTok{margin}\NormalTok{(}\AttributeTok{t =} \DecValTok{20}\NormalTok{, }\AttributeTok{r =} \DecValTok{20}\NormalTok{, }\AttributeTok{b =} \DecValTok{20}\NormalTok{, }\AttributeTok{l =} \DecValTok{20}\NormalTok{)  }\CommentTok{\# aumenta as margens}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{expansion}\NormalTok{(}\AttributeTok{mult =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.1}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{preview_jefferson_files/figure-latex/unnamed-chunk-13-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{dados\_plot }\OtherTok{\textless{}{-}}\NormalTok{ atrasos\_por\_categoria }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(media\_atraso\_depart), }\SpecialCharTok{!}\FunctionTok{is.nan}\NormalTok{(media\_atraso\_depart), }\FunctionTok{is.finite}\NormalTok{(media\_atraso\_depart))}
+
+\FunctionTok{ggplot}\NormalTok{(dados\_plot, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(obs\_categoria, media\_atraso\_depart), }\AttributeTok{y =}\NormalTok{ media\_atraso\_depart)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Categoria"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Média da Diferença de Atraso (chegada {-} partida)"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Atraso Médio por Categoria de Observação"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{preview_jefferson_files/figure-latex/unnamed-chunk-14-1.pdf}}
+um detalhe muito interessante sobre as colunas status é que ela fala se
+o avião saiu no horário certo ou quando em qual ponto está o atraso do
+voo está em de 30 em 30 minutos
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{dados\_contagem }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(status\_depart, status\_arrival)}
+
+\NormalTok{dados\_contagem}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     status_depart status_arrival      n
+## 1      Antecipado     Antecipado 371367
+## 2      Antecipado Atraso 120-240     70
+## 3      Antecipado   Atraso 30-60   1070
+## 4      Antecipado  Atraso 60-120    117
+## 5      Antecipado    Atraso >240     64
+## 6      Antecipado        Pontual  41140
+## 7  Atraso 120-240     Antecipado     32
+## 8  Atraso 120-240 Atraso 120-240   6186
+## 9  Atraso 120-240   Atraso 30-60     35
+## 10 Atraso 120-240  Atraso 60-120    821
+## 11 Atraso 120-240    Atraso >240    116
+## 12 Atraso 120-240        Pontual     41
+## 13   Atraso 30-60     Antecipado    434
+## 14   Atraso 30-60 Atraso 120-240     39
+## 15   Atraso 30-60   Atraso 30-60  27731
+## 16   Atraso 30-60  Atraso 60-120   2688
+## 17   Atraso 30-60    Atraso >240     20
+## 18   Atraso 30-60        Pontual  10697
+## 19  Atraso 60-120     Antecipado     51
+## 20  Atraso 60-120 Atraso 120-240    622
+## 21  Atraso 60-120   Atraso 30-60   2988
+## 22  Atraso 60-120  Atraso 60-120  14759
+## 23  Atraso 60-120    Atraso >240     18
+## 24  Atraso 60-120        Pontual    179
+## 25    Atraso >240     Antecipado     26
+## 26    Atraso >240 Atraso 120-240    186
+## 27    Atraso >240   Atraso 30-60     26
+## 28    Atraso >240  Atraso 60-120     30
+## 29    Atraso >240    Atraso >240   2974
+## 30    Atraso >240        Pontual     29
+## 31        Pontual     Antecipado  93753
+## 32        Pontual Atraso 120-240     62
+## 33        Pontual   Atraso 30-60  11277
+## 34        Pontual  Atraso 60-120    481
+## 35        Pontual    Atraso >240     65
+## 36        Pontual        Pontual 375067
+## 37           <NA>           <NA>  18135
+\end{verbatim}
+
+para ficar melhor de vizualizar
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{niv }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Antecipado"}\NormalTok{, }\StringTok{"Pontual"}\NormalTok{, }\StringTok{"Atraso 30{-}60"}\NormalTok{, }\StringTok{"Atraso 60{-}120"}\NormalTok{, }\StringTok{"Atraso 120{-}240"}\NormalTok{, }\StringTok{"Atraso \textgreater{}240"}\NormalTok{)}
+
+\NormalTok{dados\_contagem}\SpecialCharTok{$}\NormalTok{status\_depart }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(dados\_contagem}\SpecialCharTok{$}\NormalTok{status\_depart, }\AttributeTok{levels =}\NormalTok{ niv)}
+\NormalTok{dados\_contagem}\SpecialCharTok{$}\NormalTok{status\_arrival }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(dados\_contagem}\SpecialCharTok{$}\NormalTok{status\_arrival, }\AttributeTok{levels =}\NormalTok{ niv)}
+
+\FunctionTok{ggplot}\NormalTok{(dados\_contagem, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ status\_depart, }\AttributeTok{y =}\NormalTok{ status\_arrival)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{size =}\NormalTok{ n, }\AttributeTok{color =}\NormalTok{ n), }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ n), }\AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.8}\NormalTok{, }\AttributeTok{size =} \FloatTok{3.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size\_continuous}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{15}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_viridis\_c}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Status na Partida"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Status na Chegada"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Relação entre Status de Partida e Chegada"}\NormalTok{,}
+    \AttributeTok{size =} \StringTok{"Contagem"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Contagem"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{preview_jefferson_files/figure-latex/unnamed-chunk-16-1.pdf}}
+
+\end{document}

@@ -1,6 +1,9 @@
 ---
 title: "Analise exploratória"
-output: html_notebook
+output:
+  html_notebook: default
+  word_document: default
+  pdf_document: default
 ---
 
 A analise será feita no datasete [bfd_2019]("https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata").
@@ -38,7 +41,7 @@ obs_mais_comuns <-dados %>%
   filter(!is.na(observation)) %>%
   count(observation, sort = TRUE) 
 
-obs_mais_comuns
+head(obs_mais_comuns, 20)
 ```
 Note que temos cerca de 45 tipos de observações diferentes, para reduzir a dimenção por problemas semelhantes vamos criar uma variavel com o proposito de agregar dados semelhantes
 
@@ -173,7 +176,7 @@ voos_atraso_chegada_grande <- dados %>%
   ) %>%
   select(route, type, expected_flight_length, real_flight_length, observation)
 
-voos_atraso_chegada_grande
+head(voos_atraso_chegada_grande, 10)
 
 ```
 aqui podemos observar que mesmo com a demora para o voo sair e chegar a maior parte dos voos não tem tanta diferença de voo, porém se observamos os voos que tem uma janela de mais de 1 hora de expectativa de chegada temos o seguinte grafico

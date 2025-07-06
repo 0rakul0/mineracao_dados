@@ -1,29 +1,35 @@
 ---
 title: "Analise exploratória"
 output:
-  html_notebook: default
+  html_document:
+    df_print: paged
   word_document: default
   pdf_document: default
+  html_notebook: default
 ---
 
-A analise será feita no datasete [bfd_2019]("https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata").
+A analise será feita no datasete [bfd_2019](%22https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata%22).
 
 O objetivo é analisar e falar sobre o que tem na base assim como detalhes importantes e descobertas, assim gerando perguntas sobre o tema
 
 A base consiste em 983396 contendo 48 colunas, a documentação sobre os atributos estão em [documentação](https://osf.io/8eh3p/)
 
 carregando a basse e as lib que serão utilizadas
+
 ```{r}
 dados <- get(load(url("https://raw.githubusercontent.com/eogasawara/datamining/main/data-work/bfd_2019.rdata")))
 ```
 
 obtendo algumas informações sobre a base
+
 ```{r}
 dim(dados)
 ```
+
 ```{r}
 str(dados)
 ```
+
 À primeira vista, observamos que o conjunto de dados possui diversos pontos que podem ser explorados. Para seguir um caminho de análise, vamos examinar algumas colunas específicas e, a partir delas, destacar certos aspectos de forma mais detalhada.
 
 Por exemplo, as colunas `expected_depart`, `real_depart`, `expected_arrival` e `real_arrival` são variáveis temporais. Elas indicam os horários programados (`expected_`) e os horários reais (`real_`) de partida e chegada dos voos.
@@ -32,7 +38,7 @@ As informações de atraso ou adiantamento estão refletidas nas colunas `delay_
 
 A lógica é que, quanto maior o atraso na saída, maior a probabilidade de ele impactar também o horário de chegada ao destino.
 
-A coluna observation trás informações sobre o voo o que nos esclarece muitas coisas, sobre o que está acontecendo com o voo. 
+A coluna observation trás informações sobre o voo o que nos esclarece muitas coisas, sobre o que está acontecendo com o voo.
 
 ```{r}
 library(dplyr)
@@ -43,17 +49,21 @@ obs_mais_comuns <-dados %>%
 
 head(obs_mais_comuns, 20)
 ```
+
 Note que temos cerca de 45 tipos de observações diferentes, para reduzir a dimenção por problemas semelhantes vamos criar uma variavel com o proposito de agregar dados semelhantes
 
 ```{r}
 summary(dados$delay_depart)
 ```
+
 como podemos observar temos valores outliers
 
 ```{r}
 summary(dados$delay_arrival)
 ```
+
 vamos ver a distribuição geral
+
 ```{r}
 
 dados %>%
@@ -66,9 +76,8 @@ dados %>%
   )
 
 ```
-A mediana = 0 indica que mais da metade dos voos não tiveram atraso (ou partiram no horário).
-A média positiva (4.79 min) mostra que, no geral, os voos atrasam levemente.
-Os valores extremos originais (como 305314 ou -525623) provavelmente são erros ou registros inválidos.
+
+A mediana = 0 indica que mais da metade dos voos não tiveram atraso (ou partiram no horário). A média positiva (4.79 min) mostra que, no geral, os voos atrasam levemente. Os valores extremos originais (como 305314 ou -525623) provavelmente são erros ou registros inválidos.
 
 ```{r}
 library(ggplot2)
@@ -105,6 +114,8 @@ ggplot(dados_long, aes(x = delay, fill = tipo_delay)) +
 
 ```
 
+Assim conseguimos agrupar a categorização
+
 ```{r}
 library(stringr)
 
@@ -133,6 +144,7 @@ atrasos_por_categoria <- dados %>%
 
 atrasos_por_categoria
 ```
+
 para enteder melhor o que está acontecendo com esses voo com o tempo de viagem tão longo, podemos observar seus atributos de tempo
 
 ```{r}
@@ -148,6 +160,7 @@ voos_extremos %>%
   count(obs_categoria, sort = TRUE)
 
 ```
+
 ```{r}
 voos_extremos %>%
   count(obs_categoria, sort = TRUE) %>%
@@ -165,6 +178,7 @@ voos_extremos %>%
 ```
 
 descrição de type: (N) Nacional, (I) Internacional, (R) Regional, (H) Sub-regional, (E) Especial, (c) frete/carga, (g) frete/carga internacional e (l) rede postal;
+
 ```{r}
 library(dplyr)
 
@@ -179,7 +193,9 @@ voos_atraso_chegada_grande <- dados %>%
 head(voos_atraso_chegada_grande, 10)
 
 ```
+
 aqui podemos observar que mesmo com a demora para o voo sair e chegar a maior parte dos voos não tem tanta diferença de voo, porém se observamos os voos que tem uma janela de mais de 1 hora de expectativa de chegada temos o seguinte grafico
+
 ```{r}
 library(dplyr)
 library(ggplot2)
@@ -211,6 +227,7 @@ ggplot(obs_counts, aes(x = reorder(obs_categoria, n), y = n)) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))
 
 ```
+
 ```{r}
 library(ggplot2)
 library(dplyr)
@@ -226,6 +243,7 @@ ggplot(dados_plot, aes(x = reorder(obs_categoria, media_atraso_depart), y = medi
   theme_minimal()
 
 ```
+
 um detalhe muito interessante sobre as colunas status é que ela fala se o avião saiu no horário certo ou quando em qual ponto está o atraso do voo está em de 30 em 30 minutos
 
 ```{r}
@@ -236,7 +254,9 @@ dados_contagem <- dados %>%
 
 dados_contagem
 ```
+
 para ficar melhor de vizualizar
+
 ```{r}
 library(ggplot2)
 
@@ -260,4 +280,64 @@ ggplot(dados_contagem, aes(x = status_depart, y = status_arrival)) +
   ) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-``` 
+```
+
+vamos ver no mapa
+
+```{r}
+library(shiny)
+library(leaflet)
+library(geosphere)
+library(readr)
+library(dplyr)
+
+aeroportos <- read_csv("https://ourairports.com/data/airports.csv", show_col_types = FALSE)
+aeroportos_icao <- aeroportos %>%
+  select(ident, name, latitude_deg, longitude_deg)
+
+get_cor_tipo <- function(tipo) {
+  if (tipo == "I") return("red")
+  if (tipo == "N") return("blue")
+  return("gray")
+}
+```
+
+nesse bloco conseguimos a latitude e longitude dos aeroportos, e vamos usar a escala de cor vermelhor para voos internacionais e N para voos nacionais.
+
+```{r}
+library(leaflet)
+library(dplyr)
+
+rotas_df <- voos_atraso_chegada_grande %>%
+      mutate(
+        origem = sub("-.*", "", route),
+        destino = sub(".*-", "", route)
+      )
+
+rotas_geo <- rotas_df %>%
+  left_join(aeroportos_icao, by = c("origem" = "ident")) %>%
+  rename(lat_origem = latitude_deg, lon_origem = longitude_deg, nome_origem = name) %>%
+  left_join(aeroportos_icao, by = c("destino" = "ident")) %>%
+  rename(lat_destino = latitude_deg, lon_destino = longitude_deg, nome_destino = name) %>%
+  mutate(diff = as.numeric(real_flight_length) - as.numeric(expected_flight_length))
+
+df_filtrado <- rotas_geo %>% filter(diff > 100) %>% filter(type=='I') # I ou N
+
+
+mapa <- leaflet(df_filtrado) %>%
+  addTiles()
+
+for (i in 1:nrow(df_filtrado)) {
+  origem <- c(df_filtrado$lon_origem[i], df_filtrado$lat_origem[i])
+  destino <- c(df_filtrado$lon_destino[i], df_filtrado$lat_destino[i])
+  
+  if (any(is.na(origem)) || any(is.na(destino))) next
+  
+  cor_linha <- get_cor_tipo(df_filtrado$type[i])
+  rota <- geosphere::gcIntermediate(origem, destino, n = 100, addStartEnd = TRUE, sp = TRUE)
+  
+  mapa <- mapa %>% addPolylines(data = rota, color = cor_linha, weight = 2)
+}
+
+mapa
+```
